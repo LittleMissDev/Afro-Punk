@@ -1,5 +1,7 @@
+
 let animationsInitialized = false;
 let heroHeading;
+let heroText;
 
 const randomLetters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -9,7 +11,9 @@ function getRandomLetter() {
 
 document.addEventListener("DOMContentLoaded", () => {
     heroHeading = document.querySelectorAll("h1");
+    heroText = document.querySelector(".herotext");
     animateElements();
+    animateHeroText();
     
     // Intersection Observer for Mickey image
     const mickeyImage = document.querySelector(".Mickey");
@@ -49,3 +53,31 @@ function animateElements(){
 }
 
 
+ //HeroText Reveal Animation
+
+function animateHeroText() {
+    if (!heroText) return;
+    
+    let originalHTML = heroText.innerHTML;
+    let index = 0;
+
+    const revealText = setInterval(() => {
+        if (index <= originalHTML.length) {
+            let substring = originalHTML.substring(0, index);
+            
+            // Check if we're in the middle of an HTML tag
+            const lastOpenBracket = substring.lastIndexOf('<');
+            const lastCloseBracket = substring.lastIndexOf('>');
+            
+            // If the last < comes after the last >, we're in the middle of a tag
+            if (lastOpenBracket > lastCloseBracket) {
+                index++;
+            } else {
+                heroText.innerHTML = substring;
+                index++;
+            }
+        } else {
+            clearInterval(revealText);
+        }
+    }, 15);
+}
