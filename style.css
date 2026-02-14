@@ -7,11 +7,12 @@
 
 body{
     width: 100%;
-    height: 500vh;
+    /* height: 800vh; */
     background-color: black;
     font-family: 'Sanfford', sans-serif;
     color: white;                                            
 }
+
 
 /* Hero page section */
 
@@ -29,7 +30,209 @@ top: 0;
 z-index: -1;
 }
 
-.Heropage::after{
+
+nav{
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center; 
+ font-family: 'Unbounded', sans-serif;                                         
+  font-weight: 1000;               
+  font-size: 1rem;                                                                
+  backdrop-filter: blur(100%);
+  width: 30vw;
+  margin: 2% 0 0 69%;
+  padding: 11px;
+  border-radius: 50px;
+  z-index: 9;
+}
+
+.text{
+  text-decoration: none;
+  color: white;
+  height: 1.2em;
+    border-radius: 5px;
+    overflow: hidden;
+    /* display: inline-block; */
+    line-height: 1.2em;
+}
+
+.text:hover .letter,
+.text.play .letter {
+  transform: translateY(-100%); 
+ }
+
+ .text .block:last-child {
+  color: rgb(255, 2, 2);
+ }
+
+ .text .letter {
+  display: inline-block;
+  transition: transform 0.6s cubic-bezier(0.76, 0, 0.024, 1);
+ }
+
+
+ .letter:nth-child(1) {
+  transition-delay: 0s; 
+ }
+
+ .letter:nth-child(2) {
+  transition-delay: 0.03s; 
+ }
+
+ .letter:nth-child(3) {
+  transition-delay: 0.06s; 
+ }
+
+ .letter:nth-child(4) {
+  transition-delay: 0.09s; 
+ }
+
+ .letter:nth-child(5) {
+  transition-delay: 0.12s; 
+ }
+
+ .letter:nth-child(6) {
+  transition-delay: 0.15s; 
+ }
+
+.letter:nth-child(7) {
+  transition-delay: 0.18s; 
+ }
+
+.letter:nth-child(8) {
+  transition-delay: 0.21s; 
+ }
+
+ .letter:nth-child(9) {
+  transition-delay: 0.24s; 
+ }
+
+.letter:nth-child(10) {
+  transition-delay: 0.27s; 
+ }
+
+
+h1{
+  text-align: center;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Druk Wide Bold', sans-serif; 
+   /* font-family: 'Gasoek One', sans-serif;                                                                       */
+  font-weight: 700;
+  font-style: normal;
+  font-size: 9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  max-width: 93vw;
+  contain: layout style paint;
+}
+
+.herotext{
+  position: absolute;
+  top: 69%;
+  margin-left: 2.6vw;
+  font-family: 'Sanfford', sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
+  /* font-family: 'Aflah Akbar', sans-serif;                                             */
+  /* font-family: 'Borgen', sans-serif;   */                                                                                                                                                                                                                                                             
+ font-weight: 100;
+  font-style: normal;
+  font-size: 1.7rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  max-width: 93vw;
+}
+
+.buy{
+  position: absolute;
+  top: 93%;
+  margin-left: 2.6vw;
+  width: 10rem;
+  height: 44px;
+  background-color: rgb(100, 1, 1);
+  color: white;
+  font-family: 'Druk Wide Bold', sans-serif; 
+  font-weight: 800;
+  font-size: 0.9rem;
+ padding: 10px;
+ padding-left: 1rem;
+ border-radius: 5px;
+  border: none;
+ box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.719);
+ animation: glow 1s infinite;
+}
+
+a:link{
+  text-decoration: none;
+}
+
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px red;
+    box-shadow: 0 0 5px rgb(151, 6, 6);
+  }
+  50% {
+    box-shadow: 0 0 20px red;
+    background-color: rgb(224, 6, 6);
+  }
+  100% {
+   box-shadow: 0 0 20px red;
+   background-color: red;
+  }
+}
+
+/* media responsiveness for the Hero page */
+
+@media screen and (min-width: 320px) and (max-width: 768px){
+
+h1{
+  position: absolute;
+  top: 13%;
+  padding: 3vh 1.2vw;                                                                       */
+  font-weight: 700;
+  font-style: normal;
+  font-size: 2.6rem;
+}
+.herotext{
+  position: absolute;
+  top: 30%;
+  margin-left: 1.2vw;
+  font-family: 'Sanfford', sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  font-size: 0.9rem;
+}
+}
+
+/* About section */
+
+.About{
+  position: relative;
+  width: 100%;
+  height: 120vh;
+  /* section height determined by content */
+  padding: 2em 2em 0;
+  background-color: black;
+  color: white;
+  z-index: 1;
+}
+
+/* horizontal group for buy button + clipboard */
+.btn-group {
+  display: flex;
+  align-items: center;
+  gap: 10rem;
+  margin-top: 2rem; /* give some spacing from the paragraph */
+}
+
+.About::after{
   content: "";
   background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png");
   width: 200%;
@@ -78,132 +281,6 @@ z-index: -1;
   }
 }
 
-
-nav{
-  position: fixed;
-  top: 0;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center; 
- font-family: 'Unbounded', sans-serif;                                         
-  font-weight: 1000;               
-  font-size: 1rem;                                                                
-  backdrop-filter: blur(100%);
-  width: 30vw;
-  margin: 2% 0 0 69%;
-  padding: 11px;
-  border-radius: 50px;
-  z-index: 9;
-}
-
-nav a{
-  text-decoration: none;
-  color: white;
-  height: 11px;
-    border-radius: 5px;
-    /* font-size: 15px;
-    font-weight: 650; */
-}
-
-h1{
-  text-align: center;
-  position: absolute;
-  top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: 'Druk Wide Bold', sans-serif; 
-   /* font-family: 'Gasoek One', sans-serif;                                                                       */
-  font-weight: 700;
-  font-style: normal;
-  font-size: 9rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: clip;
-  max-width: 93vw;
-  contain: layout style paint;
-}
-
-
-.herotext{
-  position: absolute;
-  top: 69%;
-  margin-left: 2.6vw;
-  /* font-family: 'Sanfford', sans-serif; */
-  /* font-family: "Montserrat", sans-serif; */
-  /* font-family: 'Aflah Akbar', sans-serif;                                             */
-  /* font-family: 'Borgen', sans-serif;   */                                                                                                                                                                                                                                                             
- font-weight: 100;
-  font-style: normal;
-  font-size: 1.7rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: clip;
-  max-width: 93vw;
-}
-
-.buy{
-  position: absolute;
-  top: 92%;
-  margin-left: 2.6vw;
-  width: 10rem;
-  height: 44px;
-  background-color: rgb(100, 1, 1);
-  color: white;
-  font-family: 'Druk Wide Bold', sans-serif; 
-  font-weight: 800;
-  font-size: 0.9rem;
- padding: 10px;
- padding-left: 1rem;
- border-radius: 5px;
-  border: none;
- box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.719);
- animation: glow 1s infinite;
-}
-
-@keyframes glow {
-  0% {
-    box-shadow: 0 0 5px red;
-    box-shadow: 0 0 5px rgb(151, 6, 6);
-  }
-  50% {
-    box-shadow: 0 0 20px red;
-    background-color: rgb(224, 6, 6);
-  }
-  100% {
-   box-shadow: 0 0 20px red;
-   background-color: red;
-  }
-}
-
-a:link{
-  text-decoration: none;
-}
-
-
-/* media responsiveness for the Hero page */
-
-@media screen and (min-width: 320px) and (max-width: 768px){
-
-h1{
-  position: absolute;
-  top: 13%;
-  padding: 3vh 1.2vw;
-  font-family: "Space Grotesk", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 2.6rem;
-}
-
-.Mickey{
-  position: relative;
-  top: -3%;
-  width: 80vw;
-  height: 70vh;
-}
-}
-
-/* About section */
-
 .gradient{
 width: 100%;
 height: 200vw;
@@ -224,24 +301,225 @@ align-items: center;
   font-weight: 700;
   font-style: normal;
   font-size: 5rem;
-  padding-bottom: 3%;
+  padding-bottom: 2%;
 }
 
-p{
-  display: flex;
-justify-content: center;
-align-items: center;
-font-family: 'Sanfford', sans-serif;
-font-size: 1.5rem;
+.aboutpunk{
+  font-family: 'Sanfford', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  margin-top: 18vh;
+  margin-bottom: 8vh;
 }
 
-.About{
-  position: relative;
-  width: 100%;
-  height: 300vh;
-  padding: 2em;
-  background-color: black;
+.afro{
+  width: 40vw;
+  height: 78vh;
+  float: left;
+  margin-right: 2rem;
+  margin-left: -2.2rem;
+  /* margin-bottom: 1rem; */
+}
+
+.buy2{
+  /* remove absolute positioning, flow with layout */
+  position: static;
+  margin: 0;
+  width: 10rem;
+  height: 44px;
+  background-color: rgb(100, 1, 1);
   color: white;
-  z-index: 1;
-  padding-top: 10vh;
+  font-family: 'Druk Wide Bold', sans-serif; 
+  font-weight: 800;
+  font-size: 0.9rem;
+ padding: 10px;
+ padding-left: 1rem;
+ border-radius: 5px;
+  border: none;
+ box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.719);
+ animation: glow 1s infinite;
 }
+
+.clipboard{
+  /* remove positioning and transform so it flows in layout */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px; /* match buy2 outer height */
+  padding: 0 15px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-family: 'Sanfford', sans-serif;
+}
+
+.clipboard .text {
+  border: none;
+  background: transparent;
+  color: black;
+  font-family: 'Druk Wide Bold', sans-serif; 
+  padding: 0;
+  font-size: 0.7rem;
+  outline: none;
+  flex: 1;
+  min-width: 200px;
+}
+
+.clipbutton {
+  background-color: rgb(209, 207, 207);
+  border: none;
+  border-radius: 5px;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.clipbutton:active{
+  background-color: rgb(126, 124, 124);
+}
+
+.clipboard .clipbutton::before{
+  content: "Copied";
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  padding: 8px 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  font-size: 0.7rem;
+}
+
+.clipboard .clipbutton::after{
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: 50%;
+  width: 10px;
+  height: 10px;
+  transform:rotate(45deg);
+  background-color: rgba(255, 255, 255, 0.5);
+  display: none;
+}
+
+.clipboard .clipbutton::before
+.clipboard .clipbutton::after{
+  display: block;
+}
+
+/* .clipbutton:hover {
+  transform: scale(1.2);
+}
+
+.clipbutton:active {
+  transform: scale(0.95);
+} */
+
+.tokenomics{
+   width: 100%;
+  min-height: 100vh;
+  padding: 0 8em 8em; /* remove top padding to sit flush with previous section */
+  background-color: black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start; /* align boxes to top of section */
+  gap: 2em;
+}
+
+.token{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-family: 'Druk Wide Bold', sans-serif; 
+  font-weight: 700;
+  font-style: normal;
+  font-size: 5rem;
+  padding-bottom: 2%;
+}
+
+.box{
+    display: flex;
+    flex-direction: column; /* stack paragraphs on top of each other */
+    justify-content: flex-start; /* push content to TOP */
+    align-items: flex-start; /* align to left */
+    gap: 0.5rem; /* space between paragraphs */
+    flex: 0 1 45%; /* allow two boxes per row */
+    max-width: 35%;
+    height: 30vh;
+    background-color: rgba(220, 220, 220, 0.13);
+    color: white;
+     font-family: 'Druk Wide Bold', sans-serif;
+    padding: 10px;
+    border-radius: 5px;
+ box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.514);
+}
+
+.boxes{
+    display: flex;
+    flex-direction: column; /* stack paragraphs on top of each other */
+    justify-content: flex-end; /* push content to BOTTOM */
+    align-items: flex-start; /* align to left */
+    gap: 0.5rem; /* space between paragraphs */
+    flex: 0 1 45%; /* allow two boxes per row */
+    max-width: 35%;
+    height: 30vh;
+    background-color: rgba(220, 220, 220, 0.13);
+    color: white;
+     font-family: 'Druk Wide Bold', sans-serif;
+    padding: 10px;
+    border-radius: 5px;
+ box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.514);
+}
+
+.box p,
+.boxes p {
+  margin: 0; /* remove default paragraph margins */
+text-align: left;
+}
+
+.boxy{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* center both horizontally and vertically */
+  gap: 0.5rem;
+  width: 28%;
+  height: 30vh;
+  background-color: rgb(220, 220, 220);
+  color: black;
+  font-family: 'Druk Wide Bold', sans-serif;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.514);
+  z-index: 3; /* ensure it sits above other boxes */
+}
+
+.boxy p {
+  margin: 0;
+  text-align: center;
+}
+
+.tokenomics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.boxy {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* No percentage heights/widths needed */
+}
+

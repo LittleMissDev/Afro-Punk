@@ -81,3 +81,35 @@ function animateHeroText() {
         }
     }, 15);
 }
+
+//Staggered Animation for Navigation Links
+let elements = document.querySelectorAll(".text");
+
+elements.forEach((element) => { 
+    let innerText = element.innerText;
+    element.innerHTML = "";
+
+    let textContainer = document.createElement("div");
+    textContainer.classList.add("block");
+
+    for (let letter of innerText) {
+        let span = document.createElement("span");
+        span.innerText = letter.trim() === "" ? "\u00A0" : letter; // Preserve spaces
+        span.classList.add("letter");
+        textContainer.appendChild(span);
+    }
+
+    element.appendChild(textContainer);
+    element.appendChild(textContainer.cloneNode(true)); // Create duplicate for animation
+});
+
+elements.forEach((element) => {
+    element.addEventListener("mouseover", () => {
+        console.log("Hovering over:", element.textContent);
+        element.classList.add("play");
+        console.log("Play class added, class list:", element.className);
+    });
+    element.addEventListener("mouseout", () => {
+        element.classList.remove("play");
+    });
+});
