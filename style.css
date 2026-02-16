@@ -216,7 +216,7 @@ h1{
 .About{
   position: relative;
   width: 100%;
-  height: 120vh;
+  height: 105vh;
   /* section height determined by content */
   padding: 2em 2em 0;
   background-color: black;
@@ -309,7 +309,7 @@ align-items: center;
   font-size: 1.5rem;
   line-height: 1.6;
   margin-top: 18vh;
-  margin-bottom: 8vh;
+ 
 }
 
 .afro{
@@ -318,7 +318,6 @@ align-items: center;
   float: left;
   margin-right: 2rem;
   margin-left: -2.2rem;
-  /* margin-bottom: 1rem; */
 }
 
 .buy2{
@@ -350,7 +349,7 @@ align-items: center;
   background-color: rgba(255, 255, 255, 0.95);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  font-family: 'Sanfford', sans-serif;
+  /* font-family: 'Sanfford', sans-serif; */
 }
 
 .clipboard .text {
@@ -409,6 +408,15 @@ align-items: center;
   display: block;
 }
 
+.torn{
+  position: absolute;
+  top: 55%;
+  right: 5%;
+  width: 100%;
+  height: 100vh;
+  /* overflow: hidden; */
+}
+
 /* .clipbutton:hover {
   transform: scale(1.2);
 }
@@ -418,13 +426,15 @@ align-items: center;
 } */
 
 .tokenomics{
-   width: 100%;
-  min-height: 100vh;
-  padding: 0 8em 8em; /* remove top padding to sit flush with previous section */
-  background-color: black;
-  display: flex;
+  position: relative;
+   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+   width: 100%;
+  min-height: 100vh;
+  padding: 0 8em 8em;/* remove top padding to sit flush with previous section */
+  background-color: black;
   align-items: flex-start; /* align boxes to top of section */
   gap: 2em;
 }
@@ -438,6 +448,7 @@ align-items: center;
   font-weight: 700;
   font-style: normal;
   font-size: 5rem;
+  padding-top: 5%;
   padding-bottom: 2%;
 }
 
@@ -487,7 +498,7 @@ text-align: left;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%); /* center both horizontally and vertically */
   gap: 0.5rem;
@@ -507,19 +518,148 @@ text-align: left;
   text-align: center;
 }
 
-.tokenomics {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+.edges{
+  position: absolute;
+  top: 60%;
+   right: 5%;
+  width: 100%;
+  height: 100vh;
+  
+  /* left: 48%;
+  transform: translate(-50%, -50%);
+  z-index: 2; */
 }
 
-.boxy {
+.roadmap{
+  width: 100%;
+  height: 120vh;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.road{
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: 'Druk Wide Bold', sans-serif;                                                                                          
+  font-weight: 700;
+  font-style: normal;
+  font-size: 5rem;
+  padding-top: 5%;
+  z-index: 2;
+}
+
+.rmap{
+  position: relative;
+   max-width: 20%;
+    height: 20vh;
+    background-color: rgb(220, 220, 220);
+    color: rgb(12, 12, 12);
+    padding: 10px;
+    border-radius: 5px;
+ box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.514);
+ z-index: 2;
+}
+
+.phase{
+ font-family: 'Druk Wide Bold', sans-serif;
+ padding-bottom: 5px;
+}
+
+.list{
+font-family: 'Sanfford', sans-serif;
+font-size: 1.3rem;
+font-weight: 700;
+line-height: 1.5;
+}
+
+.map{
   position: absolute;
-  top: 50%;
+  top: 695%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* No percentage heights/widths needed */
+  z-index: 1;
 }
 
+.rmap:nth-child(2){
+  margin-top: 2%;
+  margin-left: 65%;
+}
+
+.rmap:nth-child(3){
+  margin-top: -5%;
+  margin-left: 20%;
+}
+
+.rmap:nth-child(4){
+  margin-top: 4%;
+  margin-left: 63%;
+}
+
+.rmap:nth-child(5){
+  margin-top: -2%;
+  margin-left: 15%;
+}
+
+.faq{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+}
+
+h5{
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 4rem;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+}
+
+.faqcon{
+  width: 100%;
+  max-width: 600px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.faqbox{
+  width: 100%;
+background-color: white;
+padding: 20px;
+border-radius: 5px;
+}
+
+
+
+.faqheading{
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+    color: black;
+     font-family: 'Druk Wide Bold', sans-serif;
+     font-size: 1.5rem;
+     /* gap: 10px; */
+  cursor: pointer;
+}
+
+.question{
+  /* font-size: 1.5rem; */
+  font-family: 'Druk Wide Bold', sans-serif;
+  padding-left: 20%;
+  float: left;
+}
+
+.symbol{
+ font-size: 1.5rem; 
+padding-left: 25%;
+}
+
+.faqtext{
+  max-height: 0;
+  overflow: hidden;
+}
