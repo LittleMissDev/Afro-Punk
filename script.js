@@ -15,16 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
     animateElements();
     animateHeroText();
     
-    // Intersection Observer for Mickey image
-    const mickeyImage = document.querySelector(".Mickey");
-    if (mickeyImage) {
+    // Intersection Observer for Afro Punk image
+    const punkImage = document.querySelector(".punk");
+    if (punkImage) {
         // Hide image initially
-        mickeyImage.style.opacity = "0";
-        mickeyImage.style.transition = "opacity 1s ease-in";
+        punkImage.style.opacity = "0";
+        punkImage.style.transition = "opacity 1s ease-in";
         
         // Make image slowly appear after page load
         setTimeout(() => {
-            mickeyImage.style.opacity = "1";
+            punkImage.style.opacity = "1";
         }, 1500);
     }
 })
@@ -159,4 +159,83 @@ document.addEventListener("DOMContentLoaded", () => {
             },
         });
     }
+});
+
+
+
+          //MARQUEE ANIMATION
+document.addEventListener('DOMContentLoaded', () => {
+  // Select all ticker containers
+  document.querySelectorAll('.ticker').forEach(ticker => {
+    const wrap = ticker.querySelector('.ticker-wrap');
+    const original = wrap?.querySelector('.ticker-text');
+    if (!wrap || !original) return;
+
+    // Get duration from data-duration (default 10s if missing)
+    const duration = parseFloat(ticker.getAttribute('data-duration')) || 10;
+
+    // Clone the original text content
+    const clone = original.cloneNode(true);
+    wrap.appendChild(clone);
+
+    // Ensure the wrap is a flex container and doesn't wrap
+    wrap.style.display = 'flex';
+    wrap.style.width = 'max-content';
+    wrap.style.gap = '20px';          // matches your CSS gap
+
+    // Wait a frame for layout to calculate widths
+    requestAnimationFrame(() => {
+      const itemWidth = original.offsetWidth;
+
+      // If width is 0 (element hidden), fallback to a reasonable estimate
+      if (itemWidth === 0) {
+        console.warn('Ticker text width is zero – check visibility');
+        return;
+      }
+
+      // Animate the wrap from 0 to -itemWidth (move left by one item)
+      const anim = gsap.to(wrap, {
+        x: -itemWidth,
+        duration: duration,
+        ease: 'none',
+        repeat: -1,
+        modifiers: {
+          x: (x, target) => {
+            // When the position reaches or passes -itemWidth, instantly reset to 0
+            if (parseFloat(x) <= -itemWidth) {
+              gsap.set(target, { x: 0 });
+              return '0px';
+            }
+            return x;
+          }
+        }
+      });
+
+      // Pause/resume on hover
+      ticker.addEventListener('mouseenter', () => anim.pause());
+      ticker.addEventListener('mouseleave', () => anim.resume());
+    });
+  });
+});
+
+
+                  // ACCORDION MENU
+ const faqboxes = document.querySelectorAll('.faqbox');
+
+faqboxes.forEach(box => {
+  box.addEventListener('click', function () {
+    faqboxes.forEach(otherBox => {
+      if (otherBox !== this) {
+        otherBox.classList.remove('active');
+        const otherSymbol = otherBox.querySelector('.symbol');
+        if (otherSymbol) otherSymbol.textContent = '+';
+      }
+    });
+
+    this.classList.toggle('active');
+    const symbol = this.querySelector('.symbol');
+    if (symbol) {
+      symbol.textContent = this.classList.contains('active') ? '−' : '+';
+    }
+  });
 });

@@ -1,8 +1,6 @@
-*{
-    margin: 0;
+  * { margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: url(Pictures/MC2.png);
 }
 
 body{
@@ -20,7 +18,7 @@ body{
 background: url(/Pictures/Red&Black.png);
  background-size: cover;
  background-repeat: no-repeat;
- height: 95vh;
+ height: 95dvh;
  width: 100%;
  display: grid;
 justify-content: center;
@@ -39,7 +37,7 @@ nav{
   align-items: center; 
  font-family: 'Unbounded', sans-serif;                                         
   font-weight: 1000;               
-  font-size: 1rem;                                                                
+  font-size: 0.9rem;                                                                
   backdrop-filter: blur(100%);
   width: 30vw;
   margin: 2% 0 0 69%;
@@ -121,7 +119,7 @@ h1{
   left: 50%;
   transform: translateX(-50%);
   font-family: 'Druk Wide Bold', sans-serif; 
-   /* font-family: 'Gasoek One', sans-serif;                                                                       */
+   /* font-family: 'Gasoek One', sans-serif;*/
   font-weight: 700;
   font-style: normal;
   font-size: 9rem;
@@ -132,13 +130,14 @@ h1{
   contain: layout style paint;
 }
 
+
 .herotext{
   position: absolute;
   top: 69%;
   margin-left: 2.6vw;
   font-family: 'Sanfford', sans-serif;
   /* font-family: "Montserrat", sans-serif; */
-  /* font-family: 'Aflah Akbar', sans-serif;                                             */
+  /* font-family: 'Aflah Akbar', sans-serif;*/
   /* font-family: 'Borgen', sans-serif;   */                                                                                                                                                                                                                                                             
  font-weight: 100;
   font-style: normal;
@@ -152,16 +151,17 @@ h1{
 .buy{
   position: absolute;
   top: 93%;
+  align-content: center;
   margin-left: 2.6vw;
-  width: 10rem;
-  height: 44px;
+  width: 14%;
+  height: 7.2vh;
   background-color: rgb(100, 1, 1);
   color: white;
   font-family: 'Druk Wide Bold', sans-serif; 
   font-weight: 800;
   font-size: 0.9rem;
  padding: 10px;
- padding-left: 1rem;
+ padding-left: 2%;
  border-radius: 5px;
   border: none;
  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.719);
@@ -192,22 +192,41 @@ a:link{
 
 @media screen and (min-width: 320px) and (max-width: 768px){
 
-h1{
-  position: absolute;
-  top: 13%;
-  padding: 3vh 1.2vw;                                                                       */
-  font-weight: 700;
-  font-style: normal;
-  font-size: 2.6rem;
+   .Heropage {
+    height: 90dvh; /* reduce height for smaller screens */
+  }
+
+ h1 {
+    font-size: 21vw;         /* scale with viewport width */
+    top: 7%;                /* adjust vertical position */
+    white-space: normal;     /* allow wrapping */
+    max-width: 96dvw;
+    z-index: 10;
+  }
+
+.punk{
+  position: relative;
+  width: 150dvw;
+  height: 94dvh;
+   top: 10%;  
+  overflow: hidden;
 }
+
 .herotext{
   position: absolute;
-  top: 30%;
-  margin-left: 1.2vw;
+  top: 80%;
+  margin-left: 4vw;
   font-family: 'Sanfford', sans-serif;
-  font-weight: 100;
+  font-weight: 500;
   font-style: normal;
-  font-size: 0.9rem;
+  font-size: 5.3vw;
+}
+
+.buy{
+  text-align: center;
+  top: 99%;
+  margin-left: 4vw;
+  width: 43%;
 }
 }
 
@@ -216,7 +235,7 @@ h1{
 .About{
   position: relative;
   width: 100%;
-  height: 105vh;
+  height: 115dvh;
   /* section height determined by content */
   padding: 2em 2em 0;
   background-color: black;
@@ -306,15 +325,15 @@ align-items: center;
 
 .aboutpunk{
   font-family: 'Sanfford', sans-serif;
-  font-size: 1.5rem;
-  line-height: 1.6;
-  margin-top: 18vh;
- 
+  font-size: 1.6rem;
+  line-height:1.4;
+  margin-top: 22vh;
+  margin-bottom: 7vh;
 }
 
 .afro{
   width: 40vw;
-  height: 78vh;
+  height: 85vh;
   float: left;
   margin-right: 2rem;
   margin-left: -2.2rem;
@@ -324,15 +343,15 @@ align-items: center;
   /* remove absolute positioning, flow with layout */
   position: static;
   margin: 0;
-  width: 10rem;
-  height: 44px;
+ width: 12vw;
+  height: 7.2vh;
   background-color: rgb(100, 1, 1);
   color: white;
   font-family: 'Druk Wide Bold', sans-serif; 
   font-weight: 800;
-  font-size: 0.9rem;
- padding: 10px;
- padding-left: 1rem;
+  font-size: 0.8rem;
+ padding: 15px 10px 10px 19px ;
+ /* padding-left: 1rem; */
  border-radius: 5px;
   border: none;
  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.719);
@@ -410,11 +429,11 @@ align-items: center;
 
 .torn{
   position: absolute;
-  top: 55%;
-  right: 5%;
+  top: 70%;
+  right: 4%;
   width: 100%;
   height: 100vh;
-  /* overflow: hidden; */
+
 }
 
 /* .clipbutton:hover {
@@ -425,6 +444,89 @@ align-items: center;
   transform: scale(0.95);
 } */
 
+
+@media screen and (max-width: 768px) {
+
+  /* ---------- ABOUT SECTION ---------- */
+  .About {
+    height: auto;            /* let content determine height */
+    padding: 2em 1em;
+  }
+
+  h2 {
+    font-size: 17vw;         /* scale heading with viewport */
+    padding-bottom: 1rem;
+  }
+
+  .afro {
+    float: none;             /* remove float */
+    width: 100%;             /* full width */
+    height: auto;            /* maintain aspect ratio */
+    margin: 0 0 1rem 0;      /* reset negative margins */
+  }
+
+  .aboutpunk {
+    font-size: 5.5vw;
+    margin-top: 1rem;
+    clear: both;
+  }
+
+  .btn-group {
+    flex-direction: column;  /* stack buttons vertically */
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .buy2 {
+     text-align: center;
+    width: 90%;            
+    max-width: 90%;
+    font-size: 0.8rem;
+    padding: 20px 20px;
+  }
+
+  .clipboard {
+    width: 90%;
+    max-width: 90%;
+    padding: 8%;
+    margin-top: 5%;
+  }
+
+  .clipboard .text {
+    min-width: auto;         /* let it shrink */
+    font-size: 0.7rem;
+  }
+
+  .torn{
+  position: absolute;
+  top: 87%;
+  right: 4%;
+  width: 100%;
+  height: 10%;
+}
+
+.gradient{
+width: 100dvw;
+height: 260dvh;
+position: relative;
+background: linear-gradient(
+  180deg,
+  rgba(0, 0, 0, 0) 0%,
+  rgba(0, 0, 0, 1) 100%
+);
+z-index: 1;
+}
+
+
+  /* Optional: adjust navigation – hide or convert to hamburger */
+  nav {
+    display: none;            /* simplest: hide on mobile */
+  }
+}
+
+
+/* TOKENOMICS SECTION */
+
 .tokenomics{
   position: relative;
    display: flex;
@@ -433,7 +535,7 @@ align-items: center;
   align-items: center;
    width: 100%;
   min-height: 100vh;
-  padding: 0 8em 8em;/* remove top padding to sit flush with previous section */
+  padding: 3em 8em 8em;/* remove top padding to sit flush with previous section */
   background-color: black;
   align-items: flex-start; /* align boxes to top of section */
   gap: 2em;
@@ -448,7 +550,7 @@ align-items: center;
   font-weight: 700;
   font-style: normal;
   font-size: 5rem;
-  padding-top: 5%;
+  padding-top: 0%;
   padding-bottom: 2%;
 }
 
@@ -520,19 +622,64 @@ text-align: left;
 
 .edges{
   position: absolute;
-  top: 60%;
-   right: 5%;
-  width: 100%;
+  top: 70%;
+  right: 24%;
+  width: 80vw;
   height: 100vh;
-  
-  /* left: 48%;
-  transform: translate(-50%, -50%);
-  z-index: 2; */
+  max-width: 100vw;
+ /* overflow: hidden; */
 }
 
+@media screen and (max-width: 768px) {
+/* ---------- TOKENOMICS SECTION ---------- */
+  .tokenomics {
+    flex-direction: column;  /* stack boxes vertically */
+    padding: 1em;
+    padding-top: 23%; /* add some spacing from previous section */
+    min-height: auto;
+  }
+
+  .token {
+    font-size: 9vw;          /* responsive heading */
+    padding-top: 2rem;
+  }
+
+  .box, .boxes {
+    justify-content: center; /* center content vertically */
+    align-items: center;    /* center content on mobile */
+    max-width: 97%;         /* full width */
+    width: 97%;
+    height: auto;            /* let content dictate height */
+    font-size: 4vw;
+    margin: 0.5rem 0;
+  }
+
+  .boxy {
+    position: static;        /* remove absolute positioning */
+    transform: none;
+    width: 100%;
+    height: auto;
+    margin: 1rem 0;
+    padding: 20px;
+    background-color: rgb(220, 220, 220); /* keep same style */
+  }
+
+  .edges{
+  position: absolute;
+  top: 81%;
+  right: 24%;
+  width: 80vw;
+  height: 100vh;
+  max-width: 100vw;
+ /* overflow: hidden; */
+}
+}
+
+
+/* ROADMAP SECTION */
 .roadmap{
   width: 100%;
-  height: 120vh;
+  height: 135vh;
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -554,7 +701,7 @@ font-family: 'Druk Wide Bold', sans-serif;
 .rmap{
   position: relative;
    max-width: 20%;
-    height: 20vh;
+    height: 25vh;
     background-color: rgb(220, 220, 220);
     color: rgb(12, 12, 12);
     padding: 10px;
@@ -577,7 +724,7 @@ line-height: 1.5;
 
 .map{
   position: absolute;
-  top: 695%;
+  top: 705%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -585,7 +732,7 @@ line-height: 1.5;
 
 .rmap:nth-child(2){
   margin-top: 2%;
-  margin-left: 65%;
+  margin-left: 72%;
 }
 
 .rmap:nth-child(3){
@@ -599,17 +746,103 @@ line-height: 1.5;
 }
 
 .rmap:nth-child(5){
-  margin-top: -2%;
-  margin-left: 15%;
+  margin-top: -10%;
+  margin-left: 9%;
 }
 
-.faq{
+@media screen and (max-width: 768px) {
+ /* ---------- ROADMAP SECTION ---------- */
+  .roadmap {
+    height: auto;            /* expand with content */
+    padding: 1rem;
+    padding-top: 20%; /* add spacing from previous section */
+  }
+
+  .road {
+    font-size: 12vw;
+    padding-top: 2rem;
+  }
+
+  /* Reset all roadmap cards to normal block flow */
+  .rmap {
+    justify-content: center;
+    text-align: center;
+    position: static !important;
+    max-width: 97%;
+    width: 97%;
+    height: auto;
+    margin: 1rem 0 !important;   /* remove all custom margins */
+  }
+
+.list{
+  font-size: 6vw;
+}
+
+  .map {
+    display: none; /* hide background map on mobile for simplicity */
+  }
+}
+
+
+/* MARQUEE SECTION */
+
+.marquee{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 50px;
+  height: 50vh;
+  min-height: 50vh;
+  background-color: black;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.ticker{
+  padding: 1vw;
+  white-space: nowrap;
+}
+
+.ticker:first-child{
+  background-color: rgb(14, 13, 13);
+  transform: rotateZ(2deg) scale(1.1);
+}
+
+.ticker:last-child{
+  background-color: red;
+  transform: rotateZ(-2deg) scale(1.1);
+}
+
+.ticker-wrap{
+  display: flex;
+  gap: 20px;
+}
+
+.ticker-text{
+   font-size: clamp(0.6rem, 4vw, 2rem);
+  font-weight: 1000;
+  letter-spacing: 0.03em;
+}
+
+.ticker:last-child .ticker-text{
+ color: black;
+}
+
+.accent{
+  color: red;
+}
+
+.ticker:last-child .accent{
+  color: white;
+}
+
+ /* FAQ SECTION */
+.faq{
+  display: flex;
+  flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 110dvh;
   background-color: black;
 }
 
@@ -617,12 +850,12 @@ h5{
   font-family: 'Druk Wide Bold', sans-serif;
   font-size: 4rem;
   padding-top: 10vh;
-  padding-bottom: 10vh;
+  padding-bottom: 3vh;
 }
 
 .faqcon{
   width: 100%;
-  max-width: 600px;
+  max-width: 68%;
   padding: 10px;
   margin: 10px;
 }
@@ -632,34 +865,88 @@ h5{
 background-color: white;
 padding: 20px;
 border-radius: 5px;
+margin-bottom: 5%;
 }
 
-
-
-.faqheading{
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
-    color: black;
-     font-family: 'Druk Wide Bold', sans-serif;
-     font-size: 1.5rem;
-     /* gap: 10px; */
-  cursor: pointer;
-}
-
-.question{
-  /* font-size: 1.5rem; */
+.faqheading {
+  display: flex;               /* enable flexbox */
+  justify-content: space-between; /* push children apart */
+  align-items: center;         /* vertically center */
+  color: black;
   font-family: 'Druk Wide Bold', sans-serif;
-  padding-left: 20%;
-  float: left;
+  font-size: 1.5rem;
+  cursor: pointer;
+  /* remove any leftover float/padding that might interfere */
 }
 
-.symbol{
- font-size: 1.5rem; 
-padding-left: 25%;
+.question {
+  font-family: 'Druk Wide Bold', sans-serif;
+  /* float: left;  <-- remove this */
+  padding-left: 0;             /* adjust if you want some left spacing */
+  margin: 0;                   /* reset margin if needed */
+  flex: 19;                     /* optional: allows text to wrap and take available space */
+}
+
+.symbol {
+  font-size: 1.5rem;
+  /* justify-self: end;  <-- not needed with flexbox */
+  padding-left: 0;             /* remove the large padding */
+  margin-left: 1rem;           /* optional: add a small gap between text and symbol */
+  white-space: nowrap;         /* prevent the plus from wrapping */
 }
 
 .faqtext{
   max-height: 0;
   overflow: hidden;
+  transition: all .4s ease-in-out;
 }
+
+.faqtext p{
+  padding-top: 10px;
+}
+
+.faqbox.active{
+  background-color: white;
+  color: black;
+}
+
+.faqbox.active .faqtext{
+  max-height: 100vh;
+  transition: all .4s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+ /* ---------- FAQ SECTION ---------- */
+  .faq {
+    height: auto;
+    min-height: 100vh;
+    padding: 1rem 1rem;
+  }
+
+  h5 {
+    font-size: 18vw;
+    padding: 5vh 0;
+  }
+
+  .faqcon {
+    max-width: 99%;           /* almost full width */
+    padding: 0;
+  }
+
+  .faqbox {
+    margin-bottom: 5%;
+  }
+
+  .faqheading {
+    font-size: 1.1rem;
+  }
+
+  .question {
+    padding-left: 1%;
+  }
+
+  .symbol {
+    padding-left: 10%;
+  }
+}
+
