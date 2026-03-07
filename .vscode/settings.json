@@ -1,3 +1,4 @@
 {
-    "CodeGPT.apiKey": "DeepSeek"
+    "CodeGPT.apiKey": "DeepSeek",
+    "liveServer.settings.port": 5501
 }
