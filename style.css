@@ -433,7 +433,8 @@ align-items: center;
   right: 4%;
   width: 100%;
   height: 100vh;
-
+  max-width: calc(100% - 8%);
+  overflow: hidden;
 }
 
 /* .clipbutton:hover {
@@ -501,8 +502,10 @@ align-items: center;
   position: absolute;
   top: 87%;
   right: 4%;
-  width: 100%;
+  width: calc(100% - 8%);
   height: 10%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .gradient{
@@ -627,7 +630,7 @@ text-align: left;
   width: 80vw;
   height: 100vh;
   max-width: 100vw;
- /* overflow: hidden; */
+  overflow: hidden;
 }
 
 @media screen and (max-width: 768px) {
@@ -668,10 +671,10 @@ text-align: left;
   position: absolute;
   top: 81%;
   right: 24%;
-  width: 80vw;
+  width: calc(100vw - 10%);
   height: 100vh;
-  max-width: 100vw;
- /* overflow: hidden; */
+  max-width: 100%;
+  overflow: hidden;
 }
 }
 
@@ -819,7 +822,7 @@ line-height: 1.5;
 }
 
 .ticker-text{
-   font-size: clamp(0.6rem, 4vw, 2rem);
+   font-size: clamp(0.6rem, 5vw, 2rem);
   font-weight: 1000;
   letter-spacing: 0.03em;
 }
@@ -836,6 +839,40 @@ line-height: 1.5;
   color: white;
 }
 
+@media screen and (max-width: 768px){
+  .marquee{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 35px;
+  height: 21vh;
+  min-height: 30vh;
+  padding-top: 5vh;
+  background-color: black;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.ticker{
+  padding: 3vw;
+  white-space: nowrap;
+}
+
+.ticker-text{
+   font-size: clamp(0.6rem, 5vw, 2rem);
+  font-weight: 1000;
+  letter-spacing: 0.03em;
+}
+
+.ticker:last-child .ticker-text{
+ color: black;
+ font-size: 5vw;
+  font-weight: 700;
+}
+
+}
+
+
  /* FAQ SECTION */
 .faq{
   display: flex;
@@ -846,6 +883,21 @@ line-height: 1.5;
   background-color: black;
   position: relative;
   z-index: 2;
+  overflow: hidden; /* keep the after pseudo-element from spilling out */
+}
+
+/* add the same grainy overlay used in .About without disturbing layout */
+.faq::after{
+  content: "";
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png");
+  width: 200%;
+  height: 200%;
+  position: absolute;      /* keep the pseudo-element inside the faq box */
+  top: 0;
+  left: 0;
+  opacity: 0.1;
+  animation: animateGrain 8s steps(10) infinite;
+  z-index: -1;             /* send behind the FAQ content */
 }
 
 h5{
@@ -949,6 +1001,76 @@ margin-bottom: 5%;
 
   .symbol {
     padding-left: 10%;
+  }
+}
+
+/* FOOTER SECTION */
+.footer {
+  width: 100%;
+  background: black;
+  color: white;
+  padding: 2rem 0;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-content p {
+  margin: 0 0 1rem 0;
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 1rem;
+}
+
+.social-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  justify-items: center;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 4.1vh; /* fallback if svg fails */
+  transition: color 0.3s ease-in-out;
+}
+
+.social-link svg {
+  width: 2vw;
+  height: 2vh;
+}
+
+.social-link:hover {
+  color: red;
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 1rem 0;
+  }
+
+  .footer-content {
+    padding: 0 1rem;
+  }
+
+  .social-links {
+    display: flex;           /* switch to flex on mobile */
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;         /* allow wrapping if too many */
   }
 }
 

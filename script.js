@@ -204,3 +204,30 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// FOOTER ANIMATIONS using Intersection Observer
+const footerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            gsap.from(".footer-content p", {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: "power2.out",
+            });
+
+            gsap.from(".social-links .social-link", {
+                opacity: 0,
+                y: 30,
+                duration: 0.8,
+                ease: "power2.out",
+                stagger: 0.2,
+            });
+
+            // Stop observing after animation
+            footerObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+
+footerObserver.observe(document.querySelector('.footer'));
