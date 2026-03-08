@@ -11,6 +11,36 @@ body{
     color: white;                                            
 }
 
+/* Preloader Animation */
+
+.overlay{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 98;
+  display: flex;
+}
+
+.bar{
+  width: 100vw;
+  height: 100vh;
+  background-color: red;
+}
+
+.counter{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-family: 'Druk Wide Bold', sans-serif;
+  z-index: 100;
+  color: white;
+  padding: 0.2em 0.4em;
+  font-size: 20vw;
+}
+
 
 /* Hero page section */
 
@@ -188,6 +218,8 @@ a:link{
   }
 }
 
+
+
 /* media responsiveness for the Hero page */
 
 @media screen and (min-width: 320px) and (max-width: 768px){
@@ -300,6 +332,15 @@ a:link{
   }
 }
 
+@keyframes cow{
+  0%{
+    filter: blur(10px);
+  }
+45% {
+   filter: blur(0);
+}
+}
+
 .gradient{
 width: 100%;
 height: 200vw;
@@ -327,8 +368,8 @@ align-items: center;
   font-family: 'Sanfford', sans-serif;
   font-size: 1.6rem;
   line-height:1.4;
-  margin-top: 22vh;
-  margin-bottom: 7vh;
+  margin-top: 20vh;
+  margin-bottom: 13vh;
 }
 
 .afro{
@@ -337,6 +378,9 @@ align-items: center;
   float: left;
   margin-right: 2rem;
   margin-left: -2.2rem;
+ transition: all 1s ease-out;
+ animation: cow linear both; 
+ animation-timeline: view();
 }
 
 .buy2{
@@ -380,7 +424,7 @@ align-items: center;
   font-size: 0.7rem;
   outline: none;
   flex: 1;
-  min-width: 200px;
+  min-width: 100px;
 }
 
 .clipbutton {
