@@ -17,7 +17,7 @@ body{
   position: fixed;
   width: 100vw;
   height: 100vh;
-  z-index: 98;
+  z-index: 5;
   display: flex;
 }
 
@@ -35,7 +35,7 @@ body{
   justify-content: flex-end;
   align-items: flex-end;
   font-family: 'Druk Wide Bold', sans-serif;
-  z-index: 100;
+  z-index: 6;
   color: white;
   padding: 0.2em 0.4em;
   font-size: 20vw;
@@ -45,7 +45,7 @@ body{
 /* Hero page section */
 
 .Heropage{
-background: url(Pictures/Red&Black.png);
+background: url(Pictures/Colourgradient.png);
  background-size: cover;
  background-repeat: no-repeat;
  height: 95dvh;
@@ -58,7 +58,6 @@ top: 0;
 z-index: -1;
 }
 
-
 nav{
   position: fixed;
   top: 0;
@@ -67,23 +66,33 @@ nav{
   align-items: center; 
  font-family: 'Unbounded', sans-serif;                                         
   font-weight: 1000;               
-  font-size: 0.9rem;                                                                
-  backdrop-filter: blur(100%);
+  font-size: 0.9rem;  
+  /* background-color: rgba(250, 235, 215, 0.055);                                                              
+  backdrop-filter: blur(60%); */
   width: 30vw;
   margin: 2% 0 0 69%;
   padding: 11px;
-  border-radius: 50px;
-  z-index: 9;
+  border-radius: 5px;
+  z-index: 8;
 }
 
-.text{
+.text {
   text-decoration: none;
   color: white;
   height: 1.2em;
-    border-radius: 5px;
-    overflow: hidden;
-    /* display: inline-block; */
-    line-height: 1.2em;
+  line-height: 1.2em;
+  border-radius: 5px;
+  overflow: hidden;
+  /* display: inline-block; */
+  position: relative;        /* ADD — keeps stacking context clean */
+  align-self: center;        /* ADD — prevents flex stretching the height */
+  vertical-align: top;       /* ADD — aligns inline-block correctly in flex */
+}
+
+/* Also add this — the block needs to be explicitly block level */
+.text .block {
+  display: block;             /* ADD — ensures blocks stack vertically */
+  white-space: nowrap;        /* ADD — prevents letters wrapping to new line */
 }
 
 .text:hover .letter,
@@ -218,8 +227,6 @@ a:link{
   }
 }
 
-
-
 /* media responsiveness for the Hero page */
 
 @media screen and (min-width: 320px) and (max-width: 768px){
@@ -251,7 +258,7 @@ a:link{
   font-family: 'Sanfford', sans-serif;
   font-weight: 500;
   font-style: normal;
-  font-size: 5.3vw;
+  font-size: 5.4vw;
 }
 
 .buy{
@@ -261,6 +268,7 @@ a:link{
   width: 43%;
 }
 }
+
 
 /* About section */
 
@@ -367,7 +375,8 @@ align-items: center;
 .aboutpunk{
   font-family: 'Sanfford', sans-serif;
   font-size: 1.6rem;
-  line-height:1.4;
+  line-height: 1.6;
+  max-width: 100vw;
   margin-top: 20vh;
   margin-bottom: 13vh;
 }
@@ -384,18 +393,16 @@ align-items: center;
 }
 
 .buy2{
-  /* remove absolute positioning, flow with layout */
   position: static;
+  text-align: center;
   margin: 0;
- width: 12vw;
   height: 7.2vh;
   background-color: rgb(100, 1, 1);
   color: white;
   font-family: 'Druk Wide Bold', sans-serif; 
   font-weight: 800;
-  font-size: 0.8rem;
- padding: 15px 10px 10px 19px ;
- /* padding-left: 1rem; */
+  font-size: 0.9rem;
+ padding: 15px 45px 15px 45px ;
  border-radius: 5px;
   border: none;
  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.719);
@@ -415,7 +422,7 @@ align-items: center;
   /* font-family: 'Sanfford', sans-serif; */
 }
 
-.clipboard .text {
+.clipboard .contract {
   border: none;
   background: transparent;
   color: black;
@@ -506,12 +513,16 @@ align-items: center;
     float: none;             /* remove float */
     width: 100%;             /* full width */
     height: auto;            /* maintain aspect ratio */
-    margin: 0 0 1rem 0;      /* reset negative margins */
+    margin: 0 0 0.5rem 0;      /* reset negative margins */
   }
 
   .aboutpunk {
-    font-size: 5.5vw;
+    font-size: 5.7vw;
     margin-top: 1rem;
+     line-height: 1.5;
+    text-align: left; /* or left, your choice */
+    max-width: 100%;
+     margin-bottom: 5vh;
     clear: both;
   }
 
@@ -538,7 +549,7 @@ align-items: center;
 
   .clipboard .text {
     min-width: auto;         /* let it shrink */
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 
   .torn{
@@ -678,9 +689,9 @@ text-align: left;
 /* ---------- TOKENOMICS SECTION ---------- */
   .tokenomics {
     flex-direction: column;  /* stack boxes vertically */
-    padding: 1em;
-    padding-top: 23%; /* add some spacing from previous section */
-    min-height: auto;
+    padding: 1em; 
+    padding-top: 18%; /* add some spacing from previous section */
+    /* min-height: auto; */
   }
 
   .token {
@@ -688,39 +699,41 @@ text-align: left;
     padding-top: 2rem;
   }
 
-  .box, .boxes {
-    justify-content: center; /* center content vertically */
-    align-items: center;    /* center content on mobile */
-    max-width: 97%;         /* full width */
-    width: 97%;
-    height: auto;            /* let content dictate height */
-    font-size: 4vw;
-    margin: 0.5rem 0;
-  }
+ .box, .boxes {
+  align-items: center;
+  max-width: 97%;
+  width: 97%;
+  padding: 10% 5%;
+  font-size: 4vw;
+  margin: 0.5rem auto;
+  gap: 0.9rem;        /* ADD — spaces the <p> elements apart */
+  line-height: 1.5;   
+   white-space: nowrap; 
+}
 
   .boxy {
     position: static;        /* remove absolute positioning */
     transform: none;
-    width: 100%;
+    width: 97%;
     height: auto;
-    margin: 1rem 0;
+    margin: 1rem auto;
     padding: 20px;
     background-color: rgb(220, 220, 220); /* keep same style */
   }
 
   .edges{
   position: absolute;
-  top: 81%;
+  top: 84%;
   right: 24%;
   width: 80vw;
-  height: 100vh;
+  height: 5%;
   max-width: 100vw;
  /* overflow: hidden; */
 }
 }
 
-
 /* ROADMAP SECTION */
+
 .roadmap{
   width: 100%;
   height: 135vh;
@@ -748,7 +761,7 @@ font-family: 'Druk Wide Bold', sans-serif;
     height: 25vh;
     background-color: rgb(220, 220, 220);
     color: rgb(12, 12, 12);
-    padding: 10px;
+    padding: 25px 10px 0 35px;
     border-radius: 5px;
  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.514);
  z-index: 2;
@@ -798,8 +811,8 @@ line-height: 1.5;
  /* ---------- ROADMAP SECTION ---------- */
   .roadmap {
     height: auto;            /* expand with content */
-    padding: 1rem;
-    padding-top: 20%; /* add spacing from previous section */
+    /* padding: 1rem; */
+    padding-top: 17%; /* add spacing from previous section */
   }
 
   .road {
@@ -809,24 +822,39 @@ line-height: 1.5;
 
   /* Reset all roadmap cards to normal block flow */
   .rmap {
-    justify-content: center;
-    text-align: center;
     position: static !important;
-    max-width: 97%;
-    width: 97%;
+    padding-bottom: 6%;
+    max-width: 96%;
+    width: 96%;
     height: auto;
-    margin: 1rem 0 !important;   /* remove all custom margins */
+    margin: 1rem auto !important;   /* remove all custom margins */
+   
+  }
+
+  .rmap .phase {
+  padding-left: 25%;
+  min-height: 1.5em; /* ADD — reserves space for the phase title */
+}
+
+.rmap .list {
+  font-size: 6vw;
+  padding-left: 8%;
+  min-height: 1.5em; /* ADD — reserves space for each list item */
+}
+
+  .phase{
+     padding-left: 25%;
   }
 
 .list{
   font-size: 6vw;
+   padding-left: 8%;
 }
 
   .map {
     display: none; /* hide background map on mobile for simplicity */
   }
 }
-
 
 /* MARQUEE SECTION */
 
@@ -910,11 +938,11 @@ line-height: 1.5;
  font-size: 5vw;
   font-weight: 700;
 }
-
 }
 
 
  /* FAQ SECTION */
+
 .faq{
   display: flex;
   flex-direction: column;
@@ -1024,7 +1052,7 @@ margin-bottom: 5%;
   }
 
   .faqcon {
-    max-width: 99%;           /* almost full width */
+    max-width: 99%;      
     padding: 0;
   }
 
@@ -1046,6 +1074,7 @@ margin-bottom: 5%;
 }
 
 /* FOOTER SECTION */
+
 .footer {
   width: 100%;
   background: black;
@@ -1097,6 +1126,7 @@ margin-bottom: 5%;
   color: red;
 }
 
+/* media queries for the footer section */
 @media screen and (max-width: 768px) {
   .footer {
     padding: 1rem 0;
