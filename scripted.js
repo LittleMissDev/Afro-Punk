@@ -1,16 +1,15 @@
 //SHOW SIDEBAR
-   function showSidebar(){
+function showSidebar(){
     const sidebar = document.querySelector(".sidebar");
     sidebar.style.display = "flex";
-   }
+}
 
-   //HIDE SIDEBAR
-   function hideSidebar(){
+//HIDE SIDEBAR
+function hideSidebar(){
     const sidebar = document.querySelector(".sidebar");
     sidebar.style.display = "none";
-   }
+}
 
-    //TEXT SHUFFLE ANIMATION
 let animationsInitialized = false;
 let heroHeading;
 let heroText;
@@ -28,66 +27,112 @@ function animateHeroText() {
     if (!heroText) return;
     let originalHTML = heroText.innerHTML;
     let index = 0;
-    const revealText = setInterval(() => {
+    const interval = setInterval(() => {
         if (index <= originalHTML.length) {
             let substring = originalHTML.substring(0, index);
-            const lastOpenBracket = substring.lastIndexOf('<');
-            const lastCloseBracket = substring.lastIndexOf('>');
-            if (lastOpenBracket > lastCloseBracket) {
+            const lastOpen  = substring.lastIndexOf('<');
+            const lastClose = substring.lastIndexOf('>');
+            if (lastOpen > lastClose) {
                 index++;
             } else {
                 heroText.innerHTML = substring;
                 index++;
             }
         } else {
-            clearInterval(revealText);
+            clearInterval(interval);
         }
     }, 0.1);
 }
 
 // ==========================================
-// HERO HEADING SCRAMBLE
+// HERO HEADING SCRAMBLE - FIXED
 // ==========================================
 function animateElements() {
     if (animationsInitialized) return;
     animationsInitialized = true;
+    
     heroHeading.forEach((element) => {
-        let originalText = element.textContent;
+        // FIX 1: Trim hidden HTML whitespace and store safely in a dataset
+        const originalText = element.dataset.value || element.textContent.trim();
+        element.dataset.value = originalText; 
+
         let index = 0;
-        const shuffleInterval = setInterval(() => {
+        const interval = setInterval(() => {
             if (index < originalText.length) {
-                let shuffledText = "";
-                for (let i = 0; i <= index; i++) {
-                    shuffledText += i < index ? originalText[i] : getRandomLetter();
+                let result = "";
+                for (let i = 0; i < originalText.length; i++) {
+                    // FIX 2: Preserve spaces so words don't collapse together
+                    if (originalText[i] === " ") {
+                        result += " ";
+                    } else {
+                        // FIX 3: Math.floor allows for fractional increments
+                        result += i < Math.floor(index) ? originalText[i] : getRandomLetter();
+                    }
                 }
-                element.textContent = shuffledText + originalText.substring(index + 1);
-                index++;
+                element.textContent = result;
+                
+                // Increment by a fraction so letters shuffle a few times before locking
+                index += 1 / 3; 
             } else {
-                clearInterval(shuffleInterval);
+                clearInterval(interval);
                 element.textContent = originalText;
             }
-        }, 180);
+        }, 30); // Sped up the interval slightly for smoother animation
     });
 }
 
 // ==========================================
-// NAV LETTER ANIMATION — called after nav is visible
+// SHUFFLE HEADINGS ON SCROLL — FIXED
+// ==========================================
+function shuffleElement(element) {
+    if (element.dataset.shuffled === 'true') return;
+    element.dataset.shuffled = 'true';
+
+    // FIX 1: Trim hidden HTML whitespace
+    const originalText = element.dataset.value || element.textContent.trim();
+    element.dataset.value = originalText;
+
+    let index = 0;
+    const interval = setInterval(() => {
+        if (index < originalText.length) {
+            let result = "";
+            for (let i = 0; i < originalText.length; i++) {
+                // FIX 2: Preserve spaces
+                if (originalText[i] === " ") {
+                    result += " ";
+                } else {
+                    result += i < Math.floor(index) ? originalText[i] : getRandomLetter();
+                }
+            }
+            element.textContent = result;
+            
+            // FIX 3: Fractional increment
+            index += 1 / 3;
+        } else {
+            clearInterval(interval);
+            element.textContent = originalText;
+        }
+    }, 30); // Sped up from 60ms
+}
+
+// ==========================================
+// NAV LETTER ANIMATION
 // ==========================================
 function buildNavLetters() {
     try {
         const navElements = document.querySelectorAll("nav a.text");
         navElements.forEach((element) => {
-            if (element.dataset.built === 'true') return; // prevent double-build
+            if (element.dataset.built === 'true') return;
             element.dataset.built = 'true';
 
-            let innerText = element.innerText;
+            const innerText = element.innerText;
             element.innerHTML = "";
 
             const makeBlock = () => {
-                let block = document.createElement("div");
+                const block = document.createElement("div");
                 block.classList.add("block");
                 for (let letter of innerText) {
-                    let span = document.createElement("span");
+                    const span = document.createElement("span");
                     span.innerText = letter.trim() === "" ? "\u00A0" : letter;
                     span.classList.add("letter");
                     block.appendChild(span);
@@ -97,7 +142,6 @@ function buildNavLetters() {
 
             element.appendChild(makeBlock());
             element.appendChild(makeBlock());
-
             element.addEventListener("mouseover", () => element.classList.add("play"));
             element.addEventListener("mouseout",  () => element.classList.remove("play"));
         });
@@ -107,7 +151,7 @@ function buildNavLetters() {
 }
 
 // ==========================================
-// HERO ANIMATIONS — called after preloader
+// TRIGGER HERO — called after preloader
 // ==========================================
 function triggerHeroAnimations() {
     animateElements();
@@ -118,13 +162,11 @@ function triggerHeroAnimations() {
         setTimeout(() => { punkImage.style.opacity = "1"; }, 1500);
     }
 
-    // Reveal nav, header, hamburger, and faq AFTER preloader ends
     const elementsToReveal = document.querySelectorAll('nav, header, .hamburger-btn, .faq');
     elementsToReveal.forEach(el => {
         el.style.visibility = 'visible';
-        el.style.transition = 'opacity 0.8s ease';
+        el.style.transition  = 'opacity 0.8s ease';
 
-        // Restore correct display value per element
         if (el.tagName === 'NAV') {
             el.style.display = window.innerWidth <= 768 ? 'none' : 'flex';
         } else if (el.classList.contains('hamburger-btn')) {
@@ -134,35 +176,12 @@ function triggerHeroAnimations() {
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
                 el.style.opacity = '1';
-                // Build nav letters AFTER nav is visible so innerText reads correctly
                 if (el.tagName === 'NAV') {
                     buildNavLetters();
                 }
             });
         });
     });
-}
-
-// ==========================================
-// SHUFFLE HEADINGS ON SCROLL
-// ==========================================
-function shuffleElement(element) {
-    if (element.dataset.shuffled === 'true') return;
-    element.dataset.shuffled = 'true';
-    const originalText = element.textContent;
-    let index = 0;
-    const shuffleInterval = setInterval(() => {
-        if (index < originalText.length) {
-            let shuffledText = "";
-            for (let i = 0; i <= index; i++) {
-                shuffledText += i < index ? originalText[i] : getRandomLetter();
-            }
-            element.textContent = shuffledText + originalText.substring(index + 1);
-        } else {
-            clearInterval(shuffleInterval);
-            element.textContent = originalText;
-        }
-    }, 100);
 }
 
 // ==========================================
@@ -173,19 +192,19 @@ function revealText(element) {
     element.dataset.revealed = 'true';
     const originalHTML = element.innerHTML;
     let index = 0;
-    const revealInterval = setInterval(() => {
+    const interval = setInterval(() => {
         if (index <= originalHTML.length) {
             let substring = originalHTML.substring(0, index);
-            const lastOpenBracket = substring.lastIndexOf('<');
-            const lastCloseBracket = substring.lastIndexOf('>');
-            if (lastOpenBracket > lastCloseBracket) {
+            const lastOpen  = substring.lastIndexOf('<');
+            const lastClose = substring.lastIndexOf('>');
+            if (lastOpen > lastClose) {
                 index++;
             } else {
                 element.innerHTML = substring;
                 index++;
             }
         } else {
-            clearInterval(revealInterval);
+            clearInterval(interval);
             element.innerHTML = originalHTML;
         }
     }, 15);
@@ -199,12 +218,12 @@ function typeWriterEffect(element, text) {
     element.dataset.typed = 'true';
     element.innerHTML = '';
     let index = 0;
-    const typeInterval = setInterval(() => {
+    const interval = setInterval(() => {
         if (index <= text.length) {
             element.innerHTML = text.substring(0, index);
             index++;
         } else {
-            clearInterval(typeInterval);
+            clearInterval(interval);
             element.innerHTML = text;
         }
     }, 7);
@@ -215,24 +234,22 @@ function typeWriterEffect(element, text) {
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
 
-    // --- References ---
     heroHeading = document.querySelectorAll("h1");
-    heroText = document.querySelector(".herotext");
+    heroText    = document.querySelector(".herotext");
 
     const punkImage = document.querySelector(".punk");
     if (punkImage) {
-        punkImage.style.opacity = "0";
+        punkImage.style.opacity   = "0";
         punkImage.style.transition = "opacity 1s ease-in";
     }
 
-    // NAV LETTER ANIMATION is now handled inside triggerHeroAnimations → buildNavLetters()
-    // so that innerText is read only after the nav is visible
-
-    // --- HEADER STICKY SCROLL ---
-    window.addEventListener("scroll", function(){
-        var header = document.querySelector("nav");
-        header.classList.toggle("sticky", window.scrollY > 0);
-    });
+    //HEADER STICKY SCROLL
+   window.addEventListener("scroll", function(){
+    const nav = document.querySelector("nav");
+    const hamburger = document.querySelector(".hamburger-btn");
+    if (nav) nav.classList.toggle("sticky", window.scrollY > 0);
+    if (hamburger) hamburger.classList.toggle("sticky", window.scrollY > 0);
+});
 
     // --- GSAP + LENIS ---
     if (window.gsap && window.ScrollTrigger) {
@@ -468,7 +485,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
     } else {
-        // No preloader — fire hero immediately
         triggerHeroAnimations();
     }
 
