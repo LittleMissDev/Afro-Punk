@@ -3,12 +3,31 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-padding-top: 100px; /* Gives your navbar 100px of breathing room */
+    scroll-behavior: smooth;   /* Makes the click glide smoothly instead of a sudden jump */
+}
+
 body{
     width: 100%;
     /* height: 800vh; */
     background-color: black;
     font-family: 'Sanfford', sans-serif;
     color: white;                                            
+}
+
+body::after {
+  content: "";
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png");
+  width: 200vw;
+  height: 200vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0.1;
+  animation: animateGrain 8s steps(10) infinite;
+  pointer-events: none; /* Crucial: lets you click the buttons! */
+  z-index: 900;         /* Puts it high above your sections, but safely behind your mobile menu (999) */
 }
 
 /* Preloader Animation */
@@ -41,6 +60,12 @@ body{
   font-size: 20vw;
 }
 
+/* This creates an unbreakable black wall behind your scrolling sections */
+.main-background-wrapper {
+    background-color: black;
+    position: relative;
+    z-index: 2;
+}
 
 /* Hero page section */
 
@@ -48,14 +73,14 @@ body{
 background: url(Pictures/Colourgradient.png);
  background-size: cover;
  background-repeat: no-repeat;
- height: 95dvh;
+ height: 95svh;
  width: 100%;
  display: grid;
 justify-content: center;
 align-items: center;
 position: fixed;
 top: 0;
-z-index: -1;
+z-index: 0;
 }
 
 nav{
@@ -93,57 +118,86 @@ nav.sticky a{
   color:white;
 }
 
-/* BASE sidebar styles — outside any media query */
+/* --- RESPONSIVE SIDEBAR --- */
 .sidebar {
-    display: none;
+    display: flex; 
     flex-direction: column;
-     align-items: center;
+    align-items: center;
     justify-content: center;
     position: fixed;
     top: 0;
     right: 0;
-    height: calc(var(--vh, 1vh) * 100);
+    height: 100vh;
     width: 100%;
-    z-index: 999;
-    background-color: rgba(0, 0, 0, 0.842);
-    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(3px);
+    max-width: 400px;
+    z-index: 98;
+    background-color: rgba(0, 0, 0, 0.95);
+    box-shadow: -10px 0 20px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
     list-style: none;
+    transform: translateX(100%); 
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    overflow: hidden;  /*Traps the grain inside the menu! */
+}
+    
+.sidebar::after {
+  content: "";
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png");
+  width: 300%;        /* Changed from vw to % so it fits the sidebar */
+  height: 300%;
+  position: absolute; /* Keeps it attached to the sidebar */
+  top: -50%;
+  left: -50%;
+  opacity: 0.1;
+  animation: animateGrain 8s steps(10) infinite;
+  pointer-events: none; 
+  z-index: -1;        /* Puts the grain behind your sidebar links! */
+}
+
+.sidebar.active {
+    transform: translateX(0); /* Slides it into view */
 }
 
 .sidebar li {
     width: 100%;
+    text-align: center;
 }
 
 .sidebar a {
     width: 100%;
-    padding: .5rem;
-    padding-left: 10%;
-    font-size: 2.5rem;
+    padding: 1rem;
+    font-size: clamp(1.8rem, 5vw, 2.5rem); /* Fluid text sizing */
     color: white;
     font-family: 'Unbounded', sans-serif;
     font-weight: 1000;
-    line-height: 3;
     text-decoration: none;
     display: block;
+    transition: color 0.2s ease;
 }
 
-
-.xmark a{
-  margin-left: 77%;
-  line-height: 0;
+.sidebar a:hover {
+    color: red; /* Nice hover effect for desktop/tablets */
 }
 
+/* Position the close button perfectly */
+.xmark {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    width: auto !important; 
+}
+
+.xmark a {
+    padding: 0; 
+}
 .hamburger-btn {
-    display: none;
+    display: none; /* Keeps it hidden on Desktop */
     position: fixed;
     top: 0.6rem;
     right: 1.2rem;
-    z-index: 20;
+    z-index: 97; /* Keeps it just below the sliding sidebar menu */
     cursor: pointer;
     list-style: none;
-    padding: 8px;
-    border-radius: 6px;
 }
 
 .hamburger-btn.sticky{
@@ -153,8 +207,6 @@ nav.sticky a{
   border-radius: 0;
  background-color: rgba(0, 0, 0, 0.541);
  backdrop-filter: blur(3px);
-  top: 0;          /* override default top offset */
-  right: 0;        /* override default right offset */
 }
 
 /* Hide elements until preloader ends */
@@ -165,6 +217,7 @@ header,
   opacity: 0;
   visibility: hidden;
 }
+
 
 .text {
   text-decoration: none;
@@ -277,6 +330,7 @@ h1{
   max-width: 93vw;
 }
 
+/* Hero Page Buy Button */
 .buy{
   position: absolute;
   top: 93%;
@@ -322,7 +376,7 @@ a:link{
 @media screen and (min-width: 320px) and (max-width: 768px){
 
    .Heropage {
-    height: 90dvh; /* reduce height for smaller screens */
+    height: 90svh; /* reduce height for smaller screens */
   }
 
   nav {
@@ -335,8 +389,23 @@ a:link{
 
   
 .hamburger-btn {
-  display: block;
-}
+      display: block;
+      padding: 10px;
+  }
+
+  .hamburger-btn.sticky {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 15px 25px; /* Gives nice top/bottom height and side padding */
+      border-radius: 0;
+      background-color: rgba(0, 0, 0, 0.85); /* Slightly darker for better contrast */
+      backdrop-filter: blur(10px);
+      top: 0;
+      right: 0;
+      text-align: right; /* Pushes the hamburger icon to the right */
+      transition: background-color 0.3s ease; /* Smooth fade in */
+  }
 
 
  h1 {
@@ -349,27 +418,30 @@ a:link{
 
 .punk{
   position: relative;
-  width: 150dvw;
-  height: 94dvh;
+  width: 150vw;
+  height: 94vh;
    top: 10%;  
   overflow: hidden;
 }
 
 .herotext{
   position: absolute;
-  top: 80%;
+  top: 77%;
   margin-left: 4vw;
   font-family: 'Sanfford', sans-serif;
   font-weight: 500;
   font-style: normal;
-  font-size: 5.4vw;
+ font-size: 6vw;
 }
 
 .buy{
   text-align: center;
   top: 99%;
   margin-left: 4vw;
-  width: 43%;
+  width: 48%;
+  height: 9vh;
+  font-size: 1rem;
+  white-space: nowrap;
 }
 }
 
@@ -379,7 +451,7 @@ a:link{
 .About{
   position: relative;
   width: 100%;
-  height: 115dvh;
+  height: 115vh;
   /* section height determined by content */
   padding: 2em 2em 0;
   background-color: black;
@@ -395,63 +467,6 @@ a:link{
   margin-top: 2rem; /* give some spacing from the paragraph */
 }
 
-.About::after{
-  content: "";
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png");
-  width: 200%;
-  height: 200%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  opacity: 0.1;
-  animation: animateGrain 8s steps(10) infinite;
-}
-
-@keyframes animateGrain {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  10% {
-    transform: translate(-5%, -10%);
-  }
-  20% {
-    transform: translate(-15%, -20%);
-  }
-  30% {
-    transform: translate(-5%, -10%);
-  }
-  40% {
-    transform: translate(-15%, -20%);
-  }
-  50% {
-    transform: translate(-5%, -10%);
-  }
-  60% {
-    transform: translate(-15%, -20%);
-  }
-  70% {
-    transform: translate(-5%, -10%);
-  }
-  80% {
-    transform: translate(-15%, -20%);
-  }
-  90% {
-    transform: translate(-5%, -10%);
-  }
-  100% {
-    transform: translate(-15%, -20%);
-  }
-}
-
-@keyframes cow{
-  0%{
-    filter: blur(10px);
-  }
-45% {
-   filter: blur(0);
-}
-}
 
 .gradient{
 width: 100%;
@@ -462,7 +477,8 @@ background: linear-gradient(
   rgba(0, 0, 0, 0) 0%,
   rgba(0, 0, 0, 1) 100%
 );
-z-index: 1;
+z-index: 0;
+pointer-events: none;
 }
 
 h2{
@@ -493,26 +509,26 @@ align-items: center;
   float: left;
   margin-right: 2rem;
   margin-left: -2.2rem;
- transition: all 1s ease-out;
- animation: cow linear both; 
- animation-timeline: view();
 }
 
-.buy2{
-  position: static;
-  text-align: center;
-  margin: 0;
-  height: 7.2vh;
-  background-color: rgb(100, 1, 1);
-  color: white;
-  font-family: 'Druk Wide Bold', sans-serif; 
-  font-weight: 800;
-  font-size: 0.9rem;
- padding: 15px 45px 15px 45px ;
- border-radius: 5px;
-  border: none;
- box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.719);
- animation: glow 1s infinite;
+.buy2 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 48px; /* Perfectly matches your clipboard input height */
+    padding: 0 40px;
+    background-color: rgb(100, 1, 1);
+    color: white;
+    font-family: 'Druk Wide Bold', sans-serif; 
+    font-weight: 800;
+    font-size: clamp(0.8rem, 1.5vw, 1rem); /* Fluid font size */
+    border-radius: 5px;
+    border: none;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.719);
+    animation: glow 1s infinite;
+    text-decoration: none;
+    white-space: nowrap; /* Prevents text from breaking into two lines */
 }
 
 .clipboard{
@@ -584,13 +600,13 @@ align-items: center;
   display: block;
 }
 
-.torn{
+.torn {
   position: absolute;
   top: 70%;
   right: 4%;
   width: 100%;
   height: 100vh;
-
+  pointer-events: none; /* <-- This makes the SVG "click-through-able" */
 }
 
 /* .clipbutton:hover {
@@ -619,17 +635,17 @@ align-items: center;
     float: none;             /* remove float */
     width: 100%;             /* full width */
     height: auto;            /* maintain aspect ratio */
-    margin: 0 0 0.5rem 0;      /* reset negative margins */
+    margin: 0 0 0 0;      /* reset negative margins */
   }
 
   .aboutpunk {
     font-size: 5.7vw;
     margin-top: 1rem;
+    min-height: 39vh;
      line-height: 1.5;
-    text-align: left; /* or left, your choice */
+    text-align: left; 
     max-width: 100%;
-     min-height: 40vh;
-     margin-bottom: 5vh;
+    margin-bottom: 5vh;
     clear: both;
   }
 
@@ -640,11 +656,11 @@ align-items: center;
   }
 
   .buy2 {
-     text-align: center;
-    width: 90%;            
+    width: 90%; 
+    height: 8vh;
     max-width: 90%;
-    font-size: 3.6vw;
-    padding: 20px 20px;
+    font-size: 1rem;
+    padding: 0; /* Let the 90% width handle the sizing */
   }
 
   .clipboard {
@@ -660,23 +676,20 @@ align-items: center;
   }
 
   .torn{
-  position: absolute;
-  top: 87%;
-  right: 4%;
-  width: 100%;
-  height: 10%;
+  display: none;
 }
 
 .gradient{
-width: 100dvw;
-height: 260dvh;
+width: 100vw;
+height: 260vh;
 position: relative;
 background: linear-gradient(
   180deg,
   rgba(0, 0, 0, 0) 0%,
   rgba(0, 0, 0, 1) 100%
 );
-z-index: 1;
+z-index: 0;
+pointer-events: none;
 }
 
 
@@ -701,6 +714,7 @@ z-index: 1;
   background-color: black;
   align-items: flex-start; /* align boxes to top of section */
   gap: 2em;
+  z-index: 1;
 }
 
 .token{
@@ -796,7 +810,7 @@ text-align: left;
   .tokenomics {
     flex-direction: column;  /* stack boxes vertically */
     padding: 1em; 
-    padding-top: 18%; /* add some spacing from previous section */
+    padding-top: 10%; /* add some spacing from previous section */
     /* min-height: auto; */
   }
 
@@ -810,7 +824,7 @@ text-align: left;
   max-width: 97%;
   width: 97%;
   padding: 10% 5%;
-  font-size: 4.2vw;
+  font-size: 4vw;
   margin: 0.5rem auto;
   gap: 0.9rem;        /* ADD — spaces the <p> elements apart */
   line-height: 1.5;   
@@ -828,25 +842,22 @@ text-align: left;
   }
 
   .edges{
-  position: absolute;
-  top: 84%;
-  right: 24%;
-  width: 80vw;
-  height: 5%;
-  max-width: 100vw;
- /* overflow: hidden; */
+ display: none;
 }
 }
 
 /* ROADMAP SECTION */
 
-.roadmap{
-  width: 100%;
-  height: 135vh;
-  background-color: black;
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
+.roadmap {
+    width: 100%;
+    height: 135vh;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    padding-bottom:15%;
+    position: relative; 
+    z-index: 1;       
 }
 
 .road{
@@ -887,7 +898,7 @@ line-height: 1.5;
 
 .map{
   position: absolute;
-  top: 705%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -917,8 +928,8 @@ line-height: 1.5;
  /* ---------- ROADMAP SECTION ---------- */
   .roadmap {
     height: auto;            /* expand with content */
-   padding-bottom: 5vh;
-    padding-top: 17%; /* add spacing from previous section */
+    /* padding: 1rem; */
+    padding-top: 10%; /* add spacing from previous section */
   }
 
   .road {
@@ -1013,20 +1024,19 @@ line-height: 1.5;
 .ticker:last-child .accent{
   color: white;
 }
-
-@media screen and (max-width: 768px){
-  .marquee{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 35px;
-  height: 21vh;
-  min-height: 30vh;
-  padding-top: 5vh;
-  background-color: black;
-  cursor: pointer;
-  overflow: hidden;
-}
+@media screen and (max-width: 768px) {
+  .marquee {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 35px;
+    height: 20vh;           /* Let the container grow naturally */
+    min-height: 20vh;       /* Give it a bit more minimum breathing room */
+    padding: 15vh 0vh;         
+    background-color: black;
+    cursor: pointer;
+    overflow: hidden;       /* This stays to hide the horizontal overflow */
+  }
 
 .ticker{
   padding: 5vw;
@@ -1054,7 +1064,7 @@ line-height: 1.5;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 110vh;
   background-color: black;
   position: relative;
   z-index: 6;
@@ -1062,19 +1072,7 @@ line-height: 1.5;
   /* opacity: 0; */
 }
 
-/* add the same grainy overlay used in .About without disturbing layout */
-.faq::after{
-  content: "";
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png");
-  width: 200%;
-  height: 200%;
-  position: absolute;      /* keep the pseudo-element inside the faq box */
-  top: 0;
-  left: 0;
-  opacity: 0.1;
-  animation: animateGrain 8s steps(10) infinite;
-  z-index: -1;             /* send behind the FAQ content */
-}
+
 
 h5{
   font-family: 'Druk Wide Bold', sans-serif;
@@ -1153,8 +1151,8 @@ padding-top: 10px;
  /* ---------- FAQ SECTION ---------- */
   .faq {
     height: auto;
-    min-height: 90vh;
-    padding: 1rem 1rem;
+    min-height: 100vh;
+    padding: 0rem 1rem;
   }
 
   h5 {
@@ -1194,6 +1192,13 @@ padding-top: 10px;
   text-align: center;
   position: relative;
   z-index: 1;
+}
+
+.line{
+  width: 100%;
+  height: 1px;
+  background-color: white;
+  margin-bottom: 5%;
 }
 
 .footer-content {
