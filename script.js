@@ -1,16 +1,43 @@
-//SHOW SIDEBAR
-   function showSidebar(){
-    const sidebar = document.querySelector(".sidebar");
-    sidebar.style.display = "flex";
-   }
+// ==========================================
+// MOBILE ADDRESS BAR BOUNCE FIX
+// ==========================================
+const lockHeroHeight = () => {
+    // Get the exact pixel height of the screen on load
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
+// Run it immediately
+lockHeroHeight();
 
-   //HIDE SIDEBAR
-   function hideSidebar(){
-    const sidebar = document.querySelector(".sidebar");
-    sidebar.style.display = "none";
-   }
+// Only recalculate if the user rotates their phone sideways, 
+// NOT when they scroll up and down!
+let currentWindowWidth = window.innerWidth;
+window.addEventListener('resize', () => {
+    if (window.innerWidth !== currentWindowWidth) {
+        currentWindowWidth = window.innerWidth;
+        lockHeroHeight();
+    }
+});
 
-    //TEXT SHUFFLE ANIMATION
+// ==========================================
+// FORCE SCROLL TO TOP ON REFRESH
+// ==========================================
+if (history.scrollRestoration) {
+    history.scrollRestoration = "manual";
+}
+window.scrollTo(0, 0);
+
+// SHOW SIDEBAR
+function showSidebar() {
+    document.querySelector(".sidebar").classList.add("active");
+}
+
+// HIDE SIDEBAR
+function hideSidebar() {
+    document.querySelector(".sidebar").classList.remove("active");
+}
+
+//TEXT SHUFFLE ANIMATION
 let animationsInitialized = false;
 let heroHeading;
 let heroText;
@@ -26,23 +53,33 @@ function getRandomLetter() {
 // ==========================================
 function animateHeroText() {
     if (!heroText) return;
+    
+    // 1. Grab the text and IMMEDIATELY empty it so it hides behind the preloader
     let originalHTML = heroText.innerHTML;
+    heroText.innerHTML = ""; 
+    
     let index = 0;
-    const revealText = setInterval(() => {
-        if (index <= originalHTML.length) {
-            let substring = originalHTML.substring(0, index);
-            const lastOpenBracket = substring.lastIndexOf('<');
-            const lastCloseBracket = substring.lastIndexOf('>');
-            if (lastOpenBracket > lastCloseBracket) {
-                index++;
+    
+    // 2. Wait 1 second for the red bars to fade enough to see through them
+    setTimeout(() => {
+        const revealText = setInterval(() => {
+            if (index <= originalHTML.length) {
+                let substring = originalHTML.substring(0, index);
+                
+                // This logic safely skips over your <br> tags
+                const lastOpenBracket = substring.lastIndexOf('<');
+                const lastCloseBracket = substring.lastIndexOf('>');
+                if (lastOpenBracket > lastCloseBracket) {
+                    index++;
+                } else {
+                    heroText.innerHTML = substring;
+                    index++;
+                }
             } else {
-                heroText.innerHTML = substring;
-                index++;
+                clearInterval(revealText);
             }
-        } else {
-            clearInterval(revealText);
-        }
-    }, 0.1);
+        }, 8); // 3. Changed from 0.1ms to 20ms for a visible, cinematic typewriter effect
+    }, 1000); // The 1-second delay
 }
 
 // ==========================================
@@ -71,76 +108,29 @@ function animateElements() {
 }
 
 // ==========================================
-// NAV LETTER ANIMATION — called after nav is visible
-// ==========================================
-function buildNavLetters() {
-    try {
-        const navElements = document.querySelectorAll("nav a.text");
-        navElements.forEach((element) => {
-            if (element.dataset.built === 'true') return; // prevent double-build
-            element.dataset.built = 'true';
-
-            let innerText = element.innerText;
-            element.innerHTML = "";
-
-            const makeBlock = () => {
-                let block = document.createElement("div");
-                block.classList.add("block");
-                for (let letter of innerText) {
-                    let span = document.createElement("span");
-                    span.innerText = letter.trim() === "" ? "\u00A0" : letter;
-                    span.classList.add("letter");
-                    block.appendChild(span);
-                }
-                return block;
-            };
-
-            element.appendChild(makeBlock());
-            element.appendChild(makeBlock());
-
-            element.addEventListener("mouseover", () => element.classList.add("play"));
-            element.addEventListener("mouseout",  () => element.classList.remove("play"));
-        });
-    } catch(e) {
-        console.warn("Nav animation error:", e);
-    }
-}
-
-// ==========================================
 // HERO ANIMATIONS — called after preloader
 // ==========================================
 function triggerHeroAnimations() {
     animateElements();
     animateHeroText();
-
+    
     const punkImage = document.querySelector(".punk");
     if (punkImage) {
         setTimeout(() => { punkImage.style.opacity = "1"; }, 1500);
     }
 
-    // Reveal nav, header, hamburger, and faq AFTER preloader ends
-    const elementsToReveal = document.querySelectorAll('nav, header, .hamburger-btn, .faq');
-    elementsToReveal.forEach(el => {
-        el.style.visibility = 'visible';
-        el.style.transition = 'opacity 0.8s ease';
-
-        // Restore correct display value per element
-        if (el.tagName === 'NAV') {
-            el.style.display = window.innerWidth <= 768 ? 'none' : 'flex';
-        } else if (el.classList.contains('hamburger-btn')) {
-            el.style.display = window.innerWidth <= 768 ? 'block' : 'none';
-        }
-
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                el.style.opacity = '1';
-                // Build nav letters AFTER nav is visible so innerText reads correctly
-                if (el.tagName === 'NAV') {
-                    buildNavLetters();
-                }
-            });
+    // --- ADDED THIS TO BRING BACK HIDDEN ELEMENTS ---
+    // This tells GSAP to fade the nav, header, hamburger, and FAQ back in 
+    // right after the loading screen finishes.
+    if (window.gsap) {
+        gsap.to("nav, header, .hamburger-btn, .faq", {
+            opacity: 1,
+            visibility: "visible", // This overrides your CSS 'visibility: hidden'
+            duration: 1.5,
+            delay: 0.5,            // Waits half a second after the hero loads
+            ease: "power2.out"
         });
-    });
+    }
 }
 
 // ==========================================
@@ -158,6 +148,7 @@ function shuffleElement(element) {
                 shuffledText += i < index ? originalText[i] : getRandomLetter();
             }
             element.textContent = shuffledText + originalText.substring(index + 1);
+            index++;
         } else {
             clearInterval(shuffleInterval);
             element.textContent = originalText;
@@ -211,11 +202,97 @@ function typeWriterEffect(element, text) {
 }
 
 // ==========================================
+// CLIPBOARD COPY
+// ==========================================
+function initClipboard() {
+    const clipButton = document.querySelector(".clipbutton");
+    const contractInput = document.querySelector(".contract");
+
+    if (!clipButton || !contractInput) return;
+
+    clipButton.addEventListener("click", () => {
+        const textToCopy = contractInput.value.trim();
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showCopiedFeedback(clipButton);
+            }).catch(() => {
+                fallbackCopy(contractInput, clipButton);
+            });
+        } else {
+            fallbackCopy(contractInput, clipButton);
+        }
+    });
+}
+
+function fallbackCopy(inputEl, buttonEl) {
+    inputEl.select();
+    inputEl.setSelectionRange(0, 99999); 
+    try {
+        document.execCommand("copy");
+        showCopiedFeedback(buttonEl);
+    } catch (err) {
+        console.warn("Copy failed:", err);
+    }
+    window.getSelection().removeAllRanges();
+}
+
+function showCopiedFeedback(button) {
+    const icon = button.querySelector("i");
+
+    if (icon) {
+        icon.classList.remove("fa-copy");
+        icon.classList.add("fa-check");
+        icon.style.color = "green";
+    }
+
+    button.style.backgroundColor = "rgb(180, 230, 180)";
+
+    let tooltip = document.querySelector(".copy-tooltip");
+    if (!tooltip) {
+        tooltip = document.createElement("span");
+        tooltip.className = "copy-tooltip";
+        tooltip.textContent = "Copied!";
+        tooltip.style.cssText = `
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            pointer-events: none;
+            font-family: 'Druk Wide Bold', sans-serif;
+            z-index: 100;
+        `;
+        const clipboard = document.querySelector(".clipboard");
+        if (clipboard) {
+            clipboard.style.position = "relative";
+            clipboard.appendChild(tooltip);
+        }
+    }
+
+    tooltip.style.opacity = "1";
+
+    setTimeout(() => {
+        if (icon) {
+            icon.classList.remove("fa-check");
+            icon.classList.add("fa-copy");
+            icon.style.color = "rgba(2, 2, 2, 1.00)";
+        }
+        button.style.backgroundColor = "rgb(209, 207, 207)";
+        if (tooltip) tooltip.style.opacity = "0";
+    }, 1800);
+}
+
+// ==========================================
 // MASTER DOM LOAD LISTENER
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
 
-    // --- References ---
     heroHeading = document.querySelectorAll("h1");
     heroText = document.querySelector(".herotext");
 
@@ -225,28 +302,71 @@ document.addEventListener("DOMContentLoaded", () => {
         punkImage.style.transition = "opacity 1s ease-in";
     }
 
-    // NAV LETTER ANIMATION is now handled inside triggerHeroAnimations → buildNavLetters()
-    // so that innerText is read only after the nav is visible
+    initClipboard();
 
-    // --- HEADER STICKY SCROLL ---
-    window.addEventListener("scroll", function(){
-        var header = document.querySelector("nav");
-        header.classList.toggle("sticky", window.scrollY > 0);
+    // --- CLOSE SIDEBAR ON LINK CLICK ---
+    // Finds all links inside the sidebar and tells them to hide the menu when clicked
+    document.querySelectorAll(".sidebar a").forEach(link => {
+        link.addEventListener("click", () => {
+            hideSidebar();
+        });
     });
 
-    // --- GSAP + LENIS ---
+    try {
+        const navElements = document.querySelectorAll("nav a.text");
+        
+       navElements.forEach((element) => {
+            let innerText = element.textContent; // 
+            element.innerHTML = "";
+
+            const makeBlock = () => {
+                let block = document.createElement("div");
+                block.classList.add("block");
+                for (let letter of innerText) {
+                    let span = document.createElement("span");
+                    span.innerText = letter.trim() === "" ? "\u00A0" : letter;
+                    span.classList.add("letter");
+                    block.appendChild(span);
+                }
+                return block;
+            };
+
+            element.appendChild(makeBlock());
+            element.appendChild(makeBlock());
+        });
+
+        navElements.forEach((element) => {
+            element.addEventListener("mouseover", () => element.classList.add("play"));
+            element.addEventListener("mouseout",  () => element.classList.remove("play"));
+        });
+
+    } catch(e) {
+        console.warn("Nav animation error:", e); 
+    }
+
+   window.addEventListener("scroll", function(){
+        const header = document.querySelector("nav");
+        const hamburger = document.querySelector(".hamburger-btn");
+        
+        // Toggles sticky on desktop
+        if (header) header.classList.toggle("sticky", window.scrollY > 0);
+        
+        // Toggles sticky on mobile
+        if (hamburger) hamburger.classList.toggle("sticky", window.scrollY > 0);
+    });
+
     if (window.gsap && window.ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger);
     }
 
     if (typeof Lenis !== 'undefined' && window.gsap) {
         const lenis = new Lenis();
+        window.scrollTo(0, 0);
         lenis.on("scroll", ScrollTrigger.update);
         gsap.ticker.add((time) => lenis.raf(time * 1000));
         gsap.ticker.lagSmoothing(0);
     }
 
-    // --- SVG PATH DRAW ---
     const paths = document.getElementById("stroke");
     if (paths && window.gsap) {
         const pathLength = paths.getTotalLength();
@@ -264,7 +384,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- MARQUEE ---
     document.querySelectorAll('.ticker').forEach(ticker => {
         const wrap     = ticker.querySelector('.ticker-wrap');
         const original = wrap?.querySelector('.ticker-text');
@@ -298,7 +417,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- FAQ ACCORDION ---
     document.querySelectorAll(".faqheading").forEach((heading) => {
         heading.style.pointerEvents = "auto";
         heading.addEventListener("click", (e) => {
@@ -318,7 +436,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- SHUFFLE HEADINGS ON SCROLL ---
     document.querySelectorAll('h2, h3, h4, h5').forEach(heading => {
         const obs = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -331,7 +448,6 @@ document.addEventListener("DOMContentLoaded", () => {
         obs.observe(heading);
     });
 
-    // --- ABOUT TEXT REVEAL ---
     const aboutPunkElement = document.querySelector('.aboutpunk');
     if (aboutPunkElement) {
         const aboutObserver = new IntersectionObserver((entries) => {
@@ -345,7 +461,6 @@ document.addEventListener("DOMContentLoaded", () => {
         aboutObserver.observe(aboutPunkElement);
     }
 
-    // --- TOKENOMICS POP ---
     const tokenBoxes = document.querySelectorAll('.box, .boxes, .boxy');
     if (tokenBoxes.length && window.gsap) {
         gsap.set(tokenBoxes, { scale: 0 });
@@ -365,7 +480,6 @@ document.addEventListener("DOMContentLoaded", () => {
         tokenBoxes.forEach(box => tokenObserver.observe(box));
     }
 
-    // --- ROADMAP CARDS ---
     const roadmapCards = document.querySelectorAll('.rmap');
     if (roadmapCards.length && window.gsap) {
         roadmapCards.forEach(card => {
@@ -399,7 +513,6 @@ document.addEventListener("DOMContentLoaded", () => {
         roadmapCards.forEach(card => roadmapObserver.observe(card));
     }
 
-    // --- FAQ BOXES STAGGER ---
     const faqBoxes = document.querySelectorAll('.faqbox');
     if (faqBoxes.length && window.gsap) {
         gsap.set(faqBoxes, {
@@ -422,7 +535,6 @@ document.addEventListener("DOMContentLoaded", () => {
         faqBoxes.forEach(box => faqObserver.observe(box));
     }
 
-    // --- FOOTER ANIMATIONS ---
     const footer = document.querySelector('.footer');
     if (footer && window.gsap) {
         const footerObserver = new IntersectionObserver((entries) => {
@@ -442,9 +554,10 @@ document.addEventListener("DOMContentLoaded", () => {
         footerObserver.observe(footer);
     }
 
-    // --- PRELOADER ---
+   // --- PRELOADER (FIXED TIMING) ---
     const counterElement = document.querySelector(".counter");
     const barElements    = document.querySelectorAll(".bar");
+    const overlayElement = document.querySelector(".overlay");
 
     if (counterElement && barElements.length && window.gsap) {
         let currentValue = 0;
@@ -457,19 +570,32 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         updateCounter();
 
-        gsap.to(counterElement, { opacity: 0, duration: 0.25, delay: 3.5 });
+        // <-- THE FIX: This fires the Hero animations at the exact 
+        // same 3.5-second mark that the bars begin to fade!
+        gsap.delayedCall(3.5, triggerHeroAnimations);
+
+        gsap.to(counterElement, { 
+            opacity: 0, 
+            duration: 0.25, 
+            delay: 3.5,
+            onComplete: () => {
+                counterElement.style.display = "none";
+            }
+        });
+        
         gsap.to(".bar", {
             opacity: 0,
             duration: 1.5,
             delay: 3.5,
             stagger: { amount: 0.5 },
             ease: "power4.inOut",
-            onComplete: triggerHeroAnimations,
+            onComplete: () => {
+                if(overlayElement) overlayElement.style.display = "none";
+            
+            }
         });
 
     } else {
-        // No preloader — fire hero immediately
         triggerHeroAnimations();
     }
-
-}); // end DOMContentLoaded
+});

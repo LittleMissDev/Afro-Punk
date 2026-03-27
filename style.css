@@ -5,7 +5,6 @@
 
 html {
     scroll-padding-top: 100px; /* Gives your navbar 100px of breathing room */
-    scroll-behavior: smooth;   /* Makes the click glide smoothly instead of a sudden jump */
 }
 
 body{
@@ -73,7 +72,8 @@ body::after {
 background: url(Pictures/Colourgradient.png);
  background-size: cover;
  background-repeat: no-repeat;
- height: 95svh;
+ height: 100vh;
+ /* height: calc(var(--vh, 1vh) * 100); */
  width: 100%;
  display: grid;
 justify-content: center;
@@ -333,7 +333,7 @@ h1{
 /* Hero Page Buy Button */
 .buy{
   position: absolute;
-  top: 93%;
+  top: 91%;
   align-content: center;
   margin-left: 2.6vw;
   width: 14%;
@@ -375,8 +375,9 @@ a:link{
 
 @media screen and (min-width: 320px) and (max-width: 768px){
 
-   .Heropage {
-    height: 90svh; /* reduce height for smaller screens */
+  .Heropage {
+    height: 100vh; 
+    /* height: calc(var(--vh, 1vh) * 100);  */
   }
 
   nav {
@@ -416,17 +417,18 @@ a:link{
     z-index: 10;
   }
 
-.punk{
-  position: relative;
-  width: 150vw;
-  height: 94vh;
-   top: 10%;  
-  overflow: hidden;
-}
+.punk {
+    position: relative;
+    width: 150vw;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100); /* Stops the ape from stretching! */
+    top: 10%;  
+    overflow: hidden;
+  }
 
 .herotext{
   position: absolute;
-  top: 77%;
+  top: 70%;
   margin-left: 4vw;
   font-family: 'Sanfford', sans-serif;
   font-weight: 500;
@@ -436,7 +438,7 @@ a:link{
 
 .buy{
   text-align: center;
-  top: 99%;
+  top: 89%;
   margin-left: 4vw;
   width: 48%;
   height: 9vh;
