@@ -461,6 +461,32 @@ document.addEventListener("DOMContentLoaded", () => {
         aboutObserver.observe(aboutPunkElement);
     }
 
+// ==========================================
+    // AFRO IMAGE POP ANIMATION
+    // ==========================================
+    const afroImage = document.querySelector('.afro');
+    if (afroImage && window.gsap) {
+        // 1. Set the initial state (shrunk down and invisible)
+        gsap.set(afroImage, { scale: 0, opacity: 0 });
+        
+        const afroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // 2. Pop it into view using the exact same ease as Tokenomics
+                    gsap.to(entry.target, {
+                        scale: 1,
+                        opacity: 1,
+                        duration: 0.8, // Slightly longer duration because it's a big image
+                        ease: "back.out(1.7)"
+                    });
+                    afroObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 }); // Triggers when 30% of the image comes into view
+        
+        afroObserver.observe(afroImage);
+    }
+
     const tokenBoxes = document.querySelectorAll('.box, .boxes, .boxy');
     if (tokenBoxes.length && window.gsap) {
         gsap.set(tokenBoxes, { scale: 0 });

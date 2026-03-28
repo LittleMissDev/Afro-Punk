@@ -5,6 +5,7 @@
 
 html {
     scroll-padding-top: 100px; /* Gives your navbar 100px of breathing room */
+    scroll-behavior: smooth;
 }
 
 body{
@@ -73,7 +74,6 @@ background: url(Pictures/Colourgradient.png);
  background-size: cover;
  background-repeat: no-repeat;
  height: 100vh;
- /* height: calc(var(--vh, 1vh) * 100); */
  width: 100%;
  display: grid;
 justify-content: center;
@@ -132,12 +132,12 @@ nav.sticky a{
     max-width: 400px;
     z-index: 98;
     background-color: rgba(0, 0, 0, 0.95);
-    box-shadow: -10px 0 20px rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(10px);
     list-style: none;
+    padding-top: env(safe-area-inset-top); /* <-- Traps the links below the notch */
     transform: translateX(100%); 
     transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-    overflow: hidden;  /*Traps the grain inside the menu! */
+    overflow: hidden; 
 }
     
 .sidebar::after {
@@ -373,11 +373,11 @@ a:link{
 
 /* media responsiveness for the Hero page */
 
-@media screen and (min-width: 320px) and (max-width: 768px){
+@media screen and (min-width: 320px) and (max-width: 800px){
 
   .Heropage {
     height: 100vh; 
-    /* height: calc(var(--vh, 1vh) * 100);  */
+     height: calc(var(--vh, 1vh) * 100);
   }
 
   nav {
@@ -389,9 +389,18 @@ a:link{
   }
 
   
-.hamburger-btn {
+/* The Invisible Base Bar */
+  .hamburger-btn {
       display: block;
-      padding: 10px;
+      width: 100%;
+      top: 0;
+      right: 0;
+      margin: 0;
+      /* Adds 15px standard padding + whatever size the phone's notch is */
+      padding: calc(15px + env(safe-area-inset-top)) 25px 15px 25px; 
+      text-align: right;
+      background-color: transparent; 
+      transition: background-color 0.3s ease; 
   }
 
   .hamburger-btn.sticky {
@@ -411,10 +420,11 @@ a:link{
 
  h1 {
     font-size: 21vw;         /* scale with viewport width */
+    position: fixed;
     top: 7%;                /* adjust vertical position */
     white-space: normal;     /* allow wrapping */
     max-width: 96dvw;
-    z-index: 10;
+    z-index: 1;
   }
 
 .punk {
@@ -620,12 +630,12 @@ align-items: center;
 } */
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
 
   /* ---------- ABOUT SECTION ---------- */
   .About {
     height: auto;            /* let content determine height */
-    padding: 2em 1em;
+    padding: 2em 0.5em;
   }
 
   h2 {
@@ -643,11 +653,11 @@ align-items: center;
   .aboutpunk {
     font-size: 5.7vw;
     margin-top: 1rem;
-    min-height: 39vh;
+    height: 33vh;
+    min-height: 33vh;
      line-height: 1.5;
     text-align: left; 
     max-width: 100%;
-    margin-bottom: 5vh;
     clear: both;
   }
 
@@ -807,40 +817,42 @@ text-align: left;
  /* overflow: hidden; */
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
 /* ---------- TOKENOMICS SECTION ---------- */
+ 
   .tokenomics {
-    flex-direction: column;  /* stack boxes vertically */
-    padding: 1em; 
-    padding-top: 10%; /* add some spacing from previous section */
-    /* min-height: auto; */
+    flex-direction: column;  
+    padding: 10% 0 0rem 0; /* 10% top, 0 on the sides, 2rem bottom */
   }
 
-  .token {
-    font-size: 9vw;          /* responsive heading */
-    padding-top: 2rem;
+  .token{
+    font-size: 9vw;
+    padding-top: 2%;
   }
 
- .box, .boxes {
-  align-items: center;
-  max-width: 97%;
-  width: 97%;
-  padding: 10% 5%;
-  font-size: 4vw;
-  margin: 0.5rem auto;
-  gap: 0.9rem;        /* ADD — spaces the <p> elements apart */
-  line-height: 1.5;   
-   white-space: nowrap; 
-}
+ /* The new 100% Math: 96% width + 2% left margin + 2% right margin */
+  .box, .boxes {
+    align-items: center;
+    width: 96%;           /* <-- Shrunk to 96% */
+    max-width: 96%;
+    margin: 0.5rem 2%;    /* <-- Your new 2% side margin! */
+    padding: 10% 5%;
+    font-size: 4vw;
+    gap: 0.9rem;        
+    line-height: 1.5;   
+    white-space: nowrap; 
+  }
 
+  /* Apply the exact same math to the center boxy */
   .boxy {
-    position: static;        /* remove absolute positioning */
+    position: static;        
     transform: none;
-    width: 97%;
+    width: 96%;           /* <-- Shrunk to 96% */
+    max-width: 96%;
     height: auto;
-    margin: 1rem auto;
+    margin: 1rem 2%;      /* <-- Your new 2% side margin! */
     padding: 20px;
-    background-color: rgb(220, 220, 220); /* keep same style */
+    background-color: rgb(220, 220, 220); 
   }
 
   .edges{
@@ -852,7 +864,7 @@ text-align: left;
 
 .roadmap {
     width: 100%;
-    height: 135vh;
+   min-height: 135vh;
     background-color: black;
     display: flex;
     flex-direction: column;
@@ -878,6 +890,7 @@ font-family: 'Druk Wide Bold', sans-serif;
   position: relative;
    max-width: 20%;
     height: 25vh;
+    flex-shrink: 0;
     background-color: rgb(220, 220, 220);
     color: rgb(12, 12, 12);
     padding: 25px 10px 0 35px;
@@ -900,7 +913,7 @@ line-height: 1.5;
 
 .map{
   position: absolute;
-  top: 60%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -926,7 +939,7 @@ line-height: 1.5;
   margin-left: 9%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
  /* ---------- ROADMAP SECTION ---------- */
   .roadmap {
     height: auto;            /* expand with content */
@@ -1026,7 +1039,7 @@ line-height: 1.5;
 .ticker:last-child .accent{
   color: white;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
   .marquee {
     display: flex;
     flex-direction: column;
@@ -1149,7 +1162,7 @@ padding-top: 10px;
   transition: all .4s ease-in-out;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
  /* ---------- FAQ SECTION ---------- */
   .faq {
     height: auto;
@@ -1245,7 +1258,7 @@ padding-top: 10px;
 }
 
 /* media queries for the footer section */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
   .footer {
     padding: 1rem 0;
   }
