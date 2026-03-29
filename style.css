@@ -74,6 +74,7 @@ background: url(Pictures/Colourgradient.png);
  background-size: cover;
  background-repeat: no-repeat;
  height: 100vh;
+ height: calc(var(--vh, 1vh) * 100);
  width: 100%;
  display: grid;
 justify-content: center;
@@ -82,6 +83,16 @@ position: fixed;
 top: 0;
 z-index: 0;
 }
+
+/* .punk {
+    position: absolute;
+    bottom: 0; 
+    height: 100vh; 
+    height: calc(var(--vh, 1vh) * 100);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+} */
 
 nav{
   position: fixed;
@@ -483,6 +494,7 @@ a:link{
 .gradient{
 width: 100%;
 height: 200vw;
+height: calc(var(--vh, 1vh) * 200);
 position: relative;
 background: linear-gradient(
   180deg,
@@ -639,6 +651,7 @@ align-items: center;
   }
 
   h2 {
+    text-align: center;
     font-size: 17vw;         /* scale heading with viewport */
     padding-bottom: 1rem;
   }
@@ -653,10 +666,11 @@ align-items: center;
   .aboutpunk {
     font-size: 5.7vw;
     margin-top: 1rem;
-    height: 33vh;
-    min-height: 33vh;
-     line-height: 1.5;
-    text-align: left; 
+    height: auto; 
+   min-height: 13em;
+    margin-bottom: 2rem; 
+    line-height: 1.5;
+    text-align: center;
     max-width: 100%;
     clear: both;
   }
@@ -682,7 +696,7 @@ align-items: center;
     margin-top: 5%;
   }
 
-  .clipboard .text {
+ .clipboard .contract {
     min-width: auto;         /* let it shrink */
     font-size: 0.8rem;
   }
@@ -722,7 +736,7 @@ pointer-events: none;
   align-items: center;
    width: 100%;
   min-height: 100vh;
-  padding: 0.7em 8em 8em;/* remove top padding to sit flush with previous section */
+  padding: 1em 8em 8em;/* remove top padding to sit flush with previous section */
   background-color: black;
   align-items: flex-start; /* align boxes to top of section */
   gap: 2em;
@@ -864,12 +878,12 @@ text-align: left;
 
 .roadmap {
     width: 100%;
-   min-height: 135vh;
+   min-height: 100vh;
     background-color: black;
     display: flex;
     flex-direction: column;
     gap: 1.4rem;
-    padding-bottom:15%;
+    padding-bottom: 6%;
     position: relative; 
     z-index: 1;       
 }
@@ -913,7 +927,7 @@ line-height: 1.5;
 
 .map{
   position: absolute;
-  top: 55%;
+  top: 62%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -1275,4 +1289,168 @@ padding-top: 10px;
     flex-wrap: wrap;         /* allow wrapping if too many */
   }
 }
+
+
+/* ==========================================
+   1. TABLETS & IPADS (801px to 1024px)
+   ========================================== */
+@media screen and (min-width: 801px) and (max-width: 1024px) {
+
+  /* Navigation */
+  nav { 
+       font-size: 1.22rem;
+        width: 53vw;
+        margin: 2% 0 0 47%;
+        padding: 11px; 
+      }
+
+  /* HEROPAGE*/
+  .heropage{
+    height: 100vh; 
+    width: 100%;}
+
+ .punk {
+    position: relative;
+    width: 140vw;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100); /* Stops the ape from stretching! */
+    top: 8%;  
+    overflow: hidden;
+  }
+
+  h1 { 
+     position: fixed; 
+     font-size: 10.6vw; 
+     top: 9%; 
+     z-index: 1;
+     }
+
+  .herotext {
+     font-size: 2.2rem; 
+     font-weight: 500;
+     top: 70%;
+     }
+
+ .buy{
+  text-align: center;
+  top: 90%;
+  margin-left: 4vw;
+  width: 36%;
+  height: 6vh;
+  font-size: 1.2rem;
+  white-space: nowrap;
+} 
+  
+  /* About */
+   /* ---------- ABOUT SECTION ---------- */
+  .About {
+    height: auto;            /* let content determine height */
+    padding: 2em 0em;
+  }
+
+  h2 {
+    font-size: 8.5vw;         /* scale heading with viewport */
+    padding-bottom: 1.4rem;
+  }
+
+  .afro {
+    float: none;             /* remove float */
+    width: 90%;             /* full width */
+    height: 70vh;            /* maintain aspect ratio */
+    margin: 0 0 0 0;      /* reset negative margins */
+  }
+
+ .aboutpunk {
+    font-size: 4.3vw;
+    margin-top: 2rem;
+    height: auto; 
+   min-height: 10em;
+    margin-bottom: 2rem; 
+    line-height: 1.5;
+    text-align: center;
+    max-width: 100%;
+    clear: both;
+  }
+
+
+  .btn-group { 
+      display: flex;
+      flex-direction: row;       /* Forces them side-by-side */
+      justify-content: center;   /* Centers the group */
+      align-items: stretch;      /* Forces both items to match heights exactly! */
+      gap: 4%;                   /* Handles the spacing cleanly */
+      margin-top: 2rem;
+  }
+
+  
+  .buy2 {
+      width: 45%; 
+      max-width: 45%;
+      height: 7vh;               /* The Master Height */
+      font-size: 1rem;
+      margin: 0;                 /* Removed the rogue margin */
+      padding: 0; 
+  }
+
+  
+  .clipboard {
+      width: 45%;
+      max-width: 45%;
+      height: 7vh;               /* Matches the Buy button perfectly */
+      margin: 0;                 /* Removed the rogue margin-top! */
+      padding: 0 15px;           /* Side padding only, no vertical padding */
+  }
+
+
+  .clipboard .contract {
+      min-width: auto;         
+      font-size: 1rem;         /* Adjust this! (Warning: 8rem will explode your layout!) */
+      width: 100%;
+  }
+
+ .torn {
+  position: absolute;
+  top: 48%;
+  right: 4%;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none; /* <-- This makes the SVG "click-through-able" */
+}
+
+
+  /* Tokenomics - Switches to a 2-column grid */
+  .token { font-size: 4rem; }
+  .box, .boxes { max-width: 45%; flex: 1 1 45%; font-size: 0.9rem; }
+  .boxy { width: 45%; font-size: 0.9rem; }
+  .edges { display: none; }
+  
+  /* Roadmap - Adjusts the zig-zag to fit the narrower screen */
+  .road { font-size: 4rem; }
+  .rmap { max-width: 40%; }
+  .rmap:nth-child(2) { margin-left: 55%; }
+  .rmap:nth-child(3) { margin-left: 5%; }
+  .rmap:nth-child(4) { margin-left: 55%; }
+  .rmap:nth-child(5) { margin-left: 5%; }
+  .map { transform: translate(-50%, -50%) scale(0.7); }
+  
+
+  /* FAQ */
+   .faq {
+    height: auto;
+    min-height: 70vh;
+    padding: 0rem 1rem;
+  }
+
+  h5 { 
+    font-size: 3.5rem;
+   }
+
+  .faqcon {
+     max-width: 85%;
+  }
+
+}
+
+  
+  
 
