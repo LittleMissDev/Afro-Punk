@@ -20,6 +20,17 @@ body{
     user-select: none; /* Standard */                                           
 }
 
+/* Make text highlight color transparent globally */
+::selection {
+    background-color: transparent;
+    color: inherit; /* Ensures the text color doesn't change when selected */
+}
+
+::-moz-selection { /* For Firefox compatibility */
+    background-color: transparent;
+    color: inherit;
+}
+
 body::after {
   content: "";
   background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png");
@@ -987,7 +998,8 @@ letter-spacing: -0.02em;
 }
 
 .rmap .list {
-  font-size: 5.1vw;
+  font-size: 5.2vw;
+  line-height: 1.6;
   padding-left: 8%;
   min-height: 1.5em; /* ADD — reserves space for each list item */
 }
