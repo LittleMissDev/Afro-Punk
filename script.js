@@ -162,8 +162,13 @@ function shuffleElement(element) {
 function revealText(element) {
     if (element.dataset.revealed === 'true') return;
     element.dataset.revealed = 'true';
-    const originalHTML = element.innerHTML;
+    
+    // Grab the stored text instead of the current innerHTML
+    const originalHTML = element.dataset.originalHTML || element.innerHTML;
+    element.innerHTML = ''; // Ensure it's completely clear before typing
+    
     let index = 0;
+
     const revealInterval = setInterval(() => {
         if (index <= originalHTML.length) {
             let substring = originalHTML.substring(0, index);
@@ -448,8 +453,12 @@ document.addEventListener("DOMContentLoaded", () => {
         obs.observe(heading);
     });
 
-    const aboutPunkElement = document.querySelector('.aboutpunk');
+   const aboutPunkElement = document.querySelector('.aboutpunk');
     if (aboutPunkElement) {
+        // Store the text and clear it immediately on page load
+        aboutPunkElement.dataset.originalHTML = aboutPunkElement.innerHTML;
+        aboutPunkElement.innerHTML = '';
+
         const aboutObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {

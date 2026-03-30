@@ -148,75 +148,140 @@ nav.sticky a{
 .sidebar {
     display: flex; 
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start; /* Left aligns all content */
+    justify-content: flex-start;
     position: fixed;
     top: 0;
     right: 0;
     height: 100vh;
     width: 100%;
-    max-width: 400px;
+    max-width: 100%; /* Makes it full screen */
     z-index: 98;
-    background-color: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
-    list-style: none;
-    padding-top: env(safe-area-inset-top); /* <-- Traps the links below the notch */
+    background-color: black; 
+    padding: 6rem 1% 2rem 1%;
     transform: translateX(100%); 
     transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-    overflow: hidden; 
-}
-    
-.sidebar::after {
-  content: "";
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png");
-  width: 300%;        /* Changed from vw to % so it fits the sidebar */
-  height: 300%;
-  position: absolute; /* Keeps it attached to the sidebar */
-  top: -50%;
-  left: -50%;
-  opacity: 0.1;
-  animation: animateGrain 8s steps(10) infinite;
-  pointer-events: none; 
-  z-index: -1;        /* Puts the grain behind your sidebar links! */
+    overflow-y: auto; /* Allows scrolling if content gets too tall */
+    opacity: 0; /* Starts completely invisible */
+    visibility: hidden; /* Prevents invisible buttons from being clicked */
+    transform: translateX(20px); /* A subtle drift instead of a full-screen slide */
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
 }
 
 .sidebar.active {
-    transform: translateX(0); /* Slides it into view */
+    opacity: 1; /* Fades in to full visibility */
+    visibility: visible; /* Makes it clickable again */
+    transform: translateX(0); /* Snaps into its final resting place */
+    transform: translateX(0);
 }
 
-.sidebar li {
-    width: 100%;
-    text-align: center;
+/* X-Mark positioning */
+.xmark {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    z-index: 100;
 }
 
-.sidebar a {
+/* --- MAIN LINKS --- */
+.sidebar-main-links {
+    list-style: none;
     width: 100%;
-    padding: 1rem;
-    font-size: clamp(1.8rem, 5vw, 2.5rem); /* Fluid text sizing */
-    line-height: 2.5;
+    margin-bottom: 2rem;
+    margin-left: 1%; /* Locks it to your 1% rule */
+    padding-left: 0;
+}
+
+.sidebar-main-links a {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.5rem 0;
+    font-size: clamp(2.1rem, 7.5vw, 3rem); /* Massive bold text */
+    line-height: 1.2;
     color: white;
     font-family: 'Druk Wide Bold', sans-serif;
     font-weight: 1000;
     text-decoration: none;
-    display: block;
     transition: color 0.2s ease;
 }
 
-.sidebar a:hover {
-    color: red; /* Nice hover effect for desktop/tablets */
+.sidebar-main-links a:hover {
+    color: red;
 }
 
-/* Position the close button perfectly */
-.xmark {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    width: auto !important; 
+/* Decorative 01 / 02 / numbers */
+.nav-num {
+    font-size: 0.8rem;
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-weight: 400;
+    opacity: 0.4;
+    margin-left: 8px;
+    margin-top: 5px;
 }
 
-.xmark a {
-    padding: 0; 
+/* --- SECONDARY LINKS --- */
+.sidebar-secondary-links {
+    list-style: none;
+    width: 100%;
+    margin-bottom: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15); /* Subtle separator line */
+    padding-top: 1.5rem;
 }
+
+.sidebar-secondary-links a {
+    display: flex;
+    justify-content: space-between; /* Pushes text left and icon right */
+    align-items: center;
+    padding: 0.8rem 0;
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.sidebar-secondary-links a:hover {
+    opacity: 0.6;
+}
+
+.sidebar-secondary-links i {
+    font-size: 0.9rem;
+}
+
+/* --- SIDEBAR FOOTER --- */
+.sidebar-footer {
+    width: 100%;
+    margin-top: auto; /* Pushes footer to the very bottom */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sidebar-legal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.sidebar-legal a {
+    color: white;
+    font-family: 'Druk Wide Bold', sans-serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.sidebar-legal a:hover {
+    opacity: 1;
+}
+
 .hamburger-btn {
     display: none; /* Keeps it hidden on Desktop */
     position: fixed;
@@ -344,10 +409,12 @@ h1{
   position: absolute;
   top: 69%;
   margin-left: 2.6vw;
-  font-family: 'Rogan', sans-serif;                                                                                                                                                                                                                                                         
- font-weight: 400;
+  font-weight: 400;
+  font-family: 'Wix Madefor Display', sans-serif;                                                                                                                                                                                                      
   font-style: normal;
-  font-size: 1.7rem;
+  font-size: 1.7vw;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: clip;
@@ -532,12 +599,12 @@ align-items: center;
 }
 
 .aboutpunk{
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   line-height: 1.6;
   max-width: 100vw;
   margin-top: 20vh;
-  margin-bottom: 13vh;
-  min-height: 13rem;   
+  margin-bottom: 11vh;
+  min-height: 10em;   
   overflow: hidden;
 }
 
@@ -934,7 +1001,7 @@ font-family: 'Druk Wide Bold', sans-serif;
 
 .list{
 font-family: 'Wix Madefor Display', sans-serif; 
-font-size: 1rem;
+font-size: 1.3rem;
 font-weight: 600;
 line-height: 1.5;
 letter-spacing: -0.02em;
@@ -1054,7 +1121,7 @@ letter-spacing: -0.02em;
 
 .ticker-text{
   font-family: Druk Wide Bold, sans-serif;
-   font-size: clamp(0.6rem, 5vw, 2rem);
+   font-size: clamp(0.57rem, 4.7vw, 1.7rem);
   font-weight: 1000;
   letter-spacing: 0.03em;
 }
@@ -1177,7 +1244,7 @@ margin-bottom: 5%;
 
 .faqtext p{
 font-family: 'Wix Madefor Display', sans-serif;
-font-size: 5.1vw;;
+font-size: 1.5vw;
 font-weight: 700;
 line-height: 1.3;
 letter-spacing: 0.02em;
@@ -1227,46 +1294,50 @@ padding-top: 10px;
   .symbol {
     padding-left: 10%;
   }
+
+  .faqtext p{
+font-size: 4.5vw;
+}
+
 }
 
 /* FOOTER SECTION */
-
 .footer {
   width: 100%;
   background: black;
   color: white;
   padding: 2rem 0;
-  text-align: center;
   position: relative;
   z-index: 1;
 }
 
-.line{
+.line {
   width: 100%;
   height: 1px;
   background-color: white;
-  margin-bottom: 5%;
+  margin-bottom: 2rem;
 }
 
 .footer-content {
+  display: flex;
+  justify-content: space-between; /* Pushes text left and icons right */
+  align-items: center; /* Vertically centers them perfectly */
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
 .footer-content p {
-  margin: 0 0 1rem 0;
+  margin: 0; /* Removed bottom margin so it aligns nicely with icons */
   font-family: 'Druk Wide Bold', sans-serif;
   font-size: 1rem;
 }
 
 .social-links {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 1rem;
-  justify-items: center;
+  display: flex; /* Changed from grid to flex for a tight row */
+  gap: 1.5rem;
   align-items: center;
-  margin-top: 0.5rem;
+  margin: 0;
 }
 
 .social-link {
@@ -1276,38 +1347,32 @@ padding-top: 10px;
   color: white;
   text-decoration: none;
   font-family: 'Druk Wide Bold', sans-serif;
-  font-size: 4.1vh; /* fallback if svg fails */
+  font-size: 1.5rem; /* Slightly reduced so they don't overpower the text */
   transition: color 0.3s ease-in-out;
-}
-
-.social-link svg {
-  width: 2vw;
-  height: 2vh;
 }
 
 .social-link:hover {
   color: red;
 }
 
-/* media queries for the footer section */
+/* --- Mobile Responsiveness for Footer --- */
 @media screen and (max-width: 800px) {
   .footer {
-    padding: 1rem 0;
+    padding: 1rem 0 2rem 0;
   }
 
   .footer-content {
+    flex-direction: column; /* Stacks them vertically on small screens */
+    text-align: center;
+    gap: 1.5rem;
     padding: 0 1rem;
   }
 
   .social-links {
-    display: flex;           /* switch to flex on mobile */
-    flex-direction: row;
     justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;         /* allow wrapping if too many */
+    width: 100%;
   }
 }
-
 
 /* ==========================================
    1. TABLETS & IPADS (801px to 1024px)
