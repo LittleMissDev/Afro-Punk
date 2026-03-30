@@ -13,7 +13,11 @@ body{
     background-color: black;
     font-weight: 400;
   font-family: 'Wix Madefor Display', sans-serif; 
-    color: white;                                            
+    color: white; 
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */                                           
 }
 
 body::after {
@@ -438,7 +442,7 @@ a:link{
 
 .punk {
     position: relative;
-    width: 120vw;
+    width: 140vw;
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100); /* Stops the ape from stretching! */
     top: 10%;  
@@ -983,7 +987,7 @@ letter-spacing: -0.02em;
 }
 
 .rmap .list {
-  font-size: 6vw;
+  font-size: 5.1vw;
   padding-left: 8%;
   min-height: 1.5em; /* ADD — reserves space for each list item */
 }
@@ -1161,7 +1165,7 @@ margin-bottom: 5%;
 
 .faqtext p{
 font-family: 'Wix Madefor Display', sans-serif;
-font-size: 1.3rem;
+font-size: 5.1vw;;
 font-weight: 700;
 line-height: 1.3;
 letter-spacing: 0.02em;
