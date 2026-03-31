@@ -47,32 +47,38 @@ body::after {
 }
 
 /* Preloader Animation */
+/* Preloader Animation */
 .overlay {
   position: fixed;
-  width: 100vw;
-  height: 100vh;
-  z-index: 5;
+  top: 0;       /* Locks the preloader to the absolute top edge */
+  left: 0;      /* Locks it to the absolute left edge */
+  width: 100%;  /* Safely fills the width without causing scrollbars */
+  height: 100%; /* Safely fills the height (bypasses the 100vh mobile bug) */
+  z-index: 9998; /* Bumped WAY up so it hides everything, including the grain */
   display: flex;
 }
 
 .bar {
-  width: 100vw;
-  height: 100vh;
+  flex: 1;      /* Tells flexbox to let all 10 bars perfectly share the screen width */
+  height: 100%; /* Matches the overlay height */
   background-color: red;
 }
 
 .counter {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   font-family: 'Druk Wide Bold', sans-serif;
-  z-index: 6;
+  z-index: 9999; /* Must be exactly 1 level higher than the overlay */
   color: white;
   padding: 0.2em 0.4em;
   font-size: 20vw;
+  pointer-events: none; /* Prevents the invisible counter box from blocking clicks */
 }
 
 .main-background-wrapper {
@@ -168,7 +174,7 @@ nav.sticky a {
 .sidebar-main-links {
   list-style: none;
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 4vh;
   margin-left: 1%; 
   padding-left: 0;
 }
@@ -176,8 +182,8 @@ nav.sticky a {
 .sidebar-main-links a {
   display: flex;
   align-items: flex-start;
-  padding: 0.5rem 0;
-  font-size: clamp(2rem, 7.4vw, 2.9rem); 
+  padding: 0.5rem 0 6%;
+  font-size: 8.5vw; 
   line-height: 1.2;
   color: white;
   font-family: 'Druk Wide Bold', sans-serif;
@@ -202,7 +208,7 @@ nav.sticky a {
 .sidebar-secondary-links {
   list-style: none;
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 4vh;
   border-top: 1px solid rgba(255, 255, 255, 0.15); 
   padding-top: 1.5rem;
 }
@@ -213,7 +219,7 @@ nav.sticky a {
   align-items: center;
   padding: 0.8rem 0;
   font-family: 'Wix Madefor Display', sans-serif;
-  font-size: 1.1rem;
+  font-size: 5vw;
   font-weight: 500;
   color: white;
   text-decoration: none;
@@ -234,8 +240,7 @@ nav.sticky a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  padding-top: 2rem;
+  padding-top: 2vh;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -243,13 +248,13 @@ nav.sticky a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  /* gap: 0.6rem; */
 }
 
 .sidebar-legal a {
   color: white;
   font-family: 'Druk Wide Bold', sans-serif;
-  font-size: 0.5rem;
+  font-size: 5vw;
   letter-spacing: 0.1em;
   text-decoration: none;
   opacity: 0.6;
@@ -502,35 +507,6 @@ h2 {
 
 .clipbutton:active {
   background-color: rgb(126, 124, 124);
-}
-
-.clipboard .clipbutton::before {
-  content: "Copied";
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  padding: 8px 10px;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 20px;
-  font-size: 0.7rem;
-}
-
-.clipboard .clipbutton::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  right: 50%;
-  width: 10px;
-  height: 10px;
-  transform:rotate(45deg);
-  background-color: rgba(255, 255, 255, 0.5);
-  display: none;
-}
-
-.clipboard .clipbutton::before,
-.clipboard .clipbutton::after {
-  display: block;
 }
 
 .torn {
@@ -1024,7 +1000,7 @@ h5 {
   }
   
   .clipboard .contract { 
-    min-width: auto; 
+    min-width: 85%; 
     font-size: 0.8rem; 
   }
   
