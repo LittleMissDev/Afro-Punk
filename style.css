@@ -1,34 +1,35 @@
-  * { margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* { 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-padding-top: 100px; /* Gives your navbar 100px of breathing room */
-    scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+  scroll-behavior: smooth;
 }
 
-body{
-    width: 100%;
-    background-color: black;
-    font-weight: 400;
+body {
+  width: 100%;
+  background-color: black;
+  font-weight: 400;
   font-family: 'Wix Madefor Display', sans-serif; 
-    color: white; 
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */                                           
+  color: white; 
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */                                          
 }
 
 /* Make text highlight color transparent globally */
 ::selection {
-    background-color: transparent;
-    color: inherit; /* Ensures the text color doesn't change when selected */
+  background-color: transparent;
+  color: inherit; 
 }
 
-::-moz-selection { /* For Firefox compatibility */
-    background-color: transparent;
-    color: inherit;
+::-moz-selection { 
+  background-color: transparent;
+  color: inherit;
 }
 
 body::after {
@@ -41,13 +42,12 @@ body::after {
   left: 0;
   opacity: 0.1;
   animation: animateGrain 8s steps(10) infinite;
-  pointer-events: none; /* Crucial: lets you click the buttons! */
-  z-index: 900;         /* Puts it high above your sections, but safely behind your mobile menu (999) */
+  pointer-events: none; 
+  z-index: 900;        
 }
 
 /* Preloader Animation */
-
-.overlay{
+.overlay {
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -55,13 +55,13 @@ body::after {
   display: flex;
 }
 
-.bar{
+.bar {
   width: 100vw;
   height: 100vh;
   background-color: red;
 }
 
-.counter{
+.counter {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -75,51 +75,37 @@ body::after {
   font-size: 20vw;
 }
 
-/* This creates an unbreakable black wall behind your scrolling sections */
 .main-background-wrapper {
-    background-color: black;
-    position: relative;
-    z-index: 2;
+  background-color: black;
+  position: relative;
+  z-index: 2;
 }
 
-/* Hero page section */
-
-.Heropage{
-background: url(Pictures/Colourgradient.png);
- background-size: cover;
- background-repeat: no-repeat;
- height: 100vh;
- height: calc(var(--vh, 1vh) * 100);
- width: 100%;
- display: grid;
-justify-content: center;
-align-items: center;
-position: fixed;
-top: 0;
-z-index: 0;
+/* --- HERO PAGE --- */
+.Heropage {
+  background: url(Pictures/Colourgradient.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 0;
 }
 
-/* .punk {
-    position: absolute;
-    bottom: 0; 
-    height: 100vh; 
-    height: calc(var(--vh, 1vh) * 100);
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-} */
-
-nav{
+nav {
   position: fixed;
   top: 0;
   display: flex;
   justify-content: space-evenly;
   align-items: center; 
- font-family: 'Unbounded', sans-serif;                                         
+  font-family: 'Unbounded', sans-serif;                                        
   font-weight: 1000;               
   font-size: 0.9rem;  
-  /* background-color: rgba(250, 235, 215, 0.055);                                                              
-  backdrop-filter: blur(60%); */
   width: 30vw;
   margin: 2% 0 0 69%;
   padding: 11px;
@@ -127,189 +113,176 @@ nav{
   z-index: 8;
 }
 
-nav.sticky{
+nav.sticky {
   display: flex;
   justify-content: flex-end;
   align-items: end;
   width: 100%;
   margin: 0 0 0 0;
- padding: 1.5%;
+  padding: 1.5%;
   border-radius: 0;
- background-color: rgba(0, 0, 0, 0.541);
- backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.541);
+  backdrop-filter: blur(3px);
 }
 
-nav.sticky a{ 
+nav.sticky a { 
   padding-right: 2%;
-  color:white;
+  color: white;
 }
 
 /* --- RESPONSIVE SIDEBAR --- */
 .sidebar {
-    display: flex; 
-    flex-direction: column;
-    align-items: flex-start; /* Left aligns all content */
-    justify-content: flex-start;
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    width: 100%;
-    max-width: 100%; /* Makes it full screen */
-    z-index: 98;
-    background-color: black; 
-    padding: 6rem 1% 2rem 1%;
-    transform: translateX(100%); 
-    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-    overflow-y: auto; /* Allows scrolling if content gets too tall */
-    opacity: 0; /* Starts completely invisible */
-    visibility: hidden; /* Prevents invisible buttons from being clicked */
-    transform: translateX(20px); /* A subtle drift instead of a full-screen slide */
-    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+  display: flex; 
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  max-width: 100%; 
+  z-index: 98;
+  background-color: black; 
+  padding: 6rem 1% 2rem 1%;
+  overflow-y: auto; 
+  opacity: 0; 
+  visibility: hidden; 
+  transform: translateX(20px); 
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
 }
 
 .sidebar.active {
-    opacity: 1; /* Fades in to full visibility */
-    visibility: visible; /* Makes it clickable again */
-    transform: translateX(0); /* Snaps into its final resting place */
-    transform: translateX(0);
+  opacity: 1; 
+  visibility: visible; 
+  transform: translateX(0); 
 }
 
-/* X-Mark positioning */
 .xmark {
-    position: absolute;
-    top: 25px;
-    right: 25px;
-    z-index: 100;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  z-index: 100;
 }
 
-/* --- MAIN LINKS --- */
 .sidebar-main-links {
-    list-style: none;
-    width: 100%;
-    margin-bottom: 2rem;
-    margin-left: 1%; /* Locks it to your 1% rule */
-    padding-left: 0;
+  list-style: none;
+  width: 100%;
+  margin-bottom: 2rem;
+  margin-left: 1%; 
+  padding-left: 0;
 }
 
 .sidebar-main-links a {
-    display: flex;
-    align-items: flex-start;
-    padding: 0.5rem 0;
-    font-size: clamp(2rem, 7.4vw, 2.9rem); /* Massive bold text */
-    line-height: 1.2;
-    color: white;
-    font-family: 'Druk Wide Bold', sans-serif;
-    font-weight: 1000;
-    text-decoration: none;
-    transition: color 0.2s ease;
+  display: flex;
+  align-items: flex-start;
+  padding: 0.5rem 0;
+  font-size: clamp(2rem, 7.4vw, 2.9rem); 
+  line-height: 1.2;
+  color: white;
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-weight: 1000;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .sidebar-main-links a:hover {
-    color: red;
+  color: red;
 }
 
-/* Decorative 01 / 02 / numbers */
 .nav-num {
-    font-size: 0.8rem;
-    font-family: 'Wix Madefor Display', sans-serif;
-    font-weight: 400;
-    opacity: 0.4;
-    margin-left: 8px;
-    margin-top: 5px;
+  font-size: 0.8rem;
+  font-family: 'Wix Madefor Display', sans-serif;
+  font-weight: 400;
+  opacity: 0.4;
+  margin-left: 8px;
+  margin-top: 5px;
 }
 
-/* --- SECONDARY LINKS --- */
 .sidebar-secondary-links {
-    list-style: none;
-    width: 100%;
-    margin-bottom: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.15); /* Subtle separator line */
-    padding-top: 1.5rem;
+  list-style: none;
+  width: 100%;
+  margin-bottom: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15); 
+  padding-top: 1.5rem;
 }
 
 .sidebar-secondary-links a {
-    display: flex;
-    justify-content: space-between; /* Pushes text left and icon right */
-    align-items: center;
-    padding: 0.8rem 0;
-    font-family: 'Wix Madefor Display', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: white;
-    text-decoration: none;
-    transition: opacity 0.2s ease;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 0.8rem 0;
+  font-family: 'Wix Madefor Display', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
 }
 
 .sidebar-secondary-links a:hover {
-    opacity: 0.6;
+  opacity: 0.6;
 }
 
 .sidebar-secondary-links i {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
-/* --- SIDEBAR FOOTER --- */
 .sidebar-footer {
-    width: 100%;
-    margin-top: auto; /* Pushes footer to the very bottom */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  width: 100%;
+  margin-top: auto; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .sidebar-legal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .sidebar-legal a {
-    color: white;
-    font-family: 'Druk Wide Bold', sans-serif;
-    font-size: 0.5rem;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-    opacity: 0.6;
-    transition: opacity 0.2s;
+  color: white;
+  font-family: 'Druk Wide Bold', sans-serif;
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.2s;
 }
 
 .sidebar-legal a:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 .hamburger-btn {
-    display: none; /* Keeps it hidden on Desktop */
-    position: fixed;
-    top: 0.6rem;
-    right: 1.2rem;
-    z-index: 97; /* Keeps it just below the sliding sidebar menu */
-    cursor: pointer;
-    list-style: none;
+  display: none; 
+  position: fixed;
+  top: 0.6rem;
+  right: 1.2rem;
+  z-index: 97; 
+  cursor: pointer;
+  list-style: none;
 }
 
-.hamburger-btn.sticky{
+.hamburger-btn.sticky {
   width: 100%;
   margin: 0 0 0 0;
- padding: 1.5%;
+  padding: 1.5%;
   border-radius: 0;
- background-color: rgba(0, 0, 0, 0.541);
- backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.541);
+  backdrop-filter: blur(3px);
 }
 
-/* Hide elements until preloader ends */
-nav,
-header,
-.hamburger-btn,
-.faq {
+nav, header, .hamburger-btn, .faq {
   opacity: 0;
   visibility: hidden;
 }
-
 
 .text {
   text-decoration: none;
@@ -318,82 +291,48 @@ header,
   line-height: 1.2em;
   border-radius: 5px;
   overflow: hidden;
-  /* display: inline-block; */
-  position: relative;        /* ADD — keeps stacking context clean */
-  align-self: center;        /* ADD — prevents flex stretching the height */
-  vertical-align: top;       /* ADD — aligns inline-block correctly in flex */
+  position: relative;        
+  align-self: center;        
+  vertical-align: top;       
 }
 
-/* Also add this — the block needs to be explicitly block level */
 .text .block {
-  display: block;             /* ADD — ensures blocks stack vertically */
-  white-space: nowrap;        /* ADD — prevents letters wrapping to new line */
+  display: block;             
+  white-space: nowrap;        
 }
 
 .text:hover .letter,
 .text.play .letter {
   transform: translateY(-100%); 
- }
+}
 
- .text .block:last-child {
+.text .block:last-child {
   color: rgb(255, 2, 2);
- }
+}
 
- .text .letter {
+.text .letter {
   display: inline-block;
   transition: transform 0.6s cubic-bezier(0.76, 0, 0.024, 1);
- }
+}
 
+.letter:nth-child(1) { transition-delay: 0s; }
+.letter:nth-child(2) { transition-delay: 0.03s; }
+.letter:nth-child(3) { transition-delay: 0.06s; }
+.letter:nth-child(4) { transition-delay: 0.09s; }
+.letter:nth-child(5) { transition-delay: 0.12s; }
+.letter:nth-child(6) { transition-delay: 0.15s; }
+.letter:nth-child(7) { transition-delay: 0.18s; }
+.letter:nth-child(8) { transition-delay: 0.21s; }
+.letter:nth-child(9) { transition-delay: 0.24s; }
+.letter:nth-child(10) { transition-delay: 0.27s; }
 
- .letter:nth-child(1) {
-  transition-delay: 0s; 
- }
-
- .letter:nth-child(2) {
-  transition-delay: 0.03s; 
- }
-
- .letter:nth-child(3) {
-  transition-delay: 0.06s; 
- }
-
- .letter:nth-child(4) {
-  transition-delay: 0.09s; 
- }
-
- .letter:nth-child(5) {
-  transition-delay: 0.12s; 
- }
-
- .letter:nth-child(6) {
-  transition-delay: 0.15s; 
- }
-
-.letter:nth-child(7) {
-  transition-delay: 0.18s; 
- }
-
-.letter:nth-child(8) {
-  transition-delay: 0.21s; 
- }
-
- .letter:nth-child(9) {
-  transition-delay: 0.24s; 
- }
-
-.letter:nth-child(10) {
-  transition-delay: 0.27s; 
- }
-
-
-h1{
+h1 {
   text-align: center;
   position: absolute;
   top: 50px;
   left: 50%;
   transform: translateX(-50%);
   font-family: 'Druk Wide Bold', sans-serif; 
-   /* font-family: 'Gasoek One', sans-serif;*/
   font-weight: 700;
   font-style: normal;
   font-size: 9rem;
@@ -404,13 +343,12 @@ h1{
   contain: layout style paint;
 }
 
-
-.herotext{
+.herotext {
   position: absolute;
   top: 69%;
   margin-left: 2.6vw;
   font-weight: 400;
-  font-family: 'Wix Madefor Display', sans-serif;                                                                                                                                                                                                      
+  font-family: 'Wix Madefor Display', sans-serif;                                                                                                                                                                                                                                 
   font-style: normal;
   font-size: 1.7vw;
   line-height: 1.4;
@@ -421,8 +359,7 @@ h1{
   max-width: 93vw;
 }
 
-/* Hero Page Buy Button */
-.buy{
+.buy {
   position: absolute;
   top: 91%;
   align-content: center;
@@ -434,171 +371,64 @@ h1{
   font-family: 'Druk Wide Bold', sans-serif; 
   font-weight: 800;
   font-size: 0.9rem;
- padding: 10px;
- padding-left: 2%;
- border-radius: 5px;
+  padding: 10px;
+  padding-left: 2%;
+  border-radius: 5px;
   border: none;
- box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.719);
- animation: glow 1s infinite;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.719);
+  animation: glow 1s infinite;
 }
 
-a:link{
+a:link {
   text-decoration: none;
 }
 
-
 @keyframes glow {
-  0% {
-    box-shadow: 0 0 5px red;
-    box-shadow: 0 0 5px rgb(151, 6, 6);
-  }
-  50% {
-    box-shadow: 0 0 20px red;
-    background-color: rgb(224, 6, 6);
-  }
-  100% {
-   box-shadow: 0 0 20px red;
-   background-color: red;
-  }
+  0% { box-shadow: 0 0 5px red; box-shadow: 0 0 5px rgb(151, 6, 6); }
+  50% { box-shadow: 0 0 20px red; background-color: rgb(224, 6, 6); }
+  100% { box-shadow: 0 0 20px red; background-color: red; }
 }
 
-/* media responsiveness for the Hero page */
-
-@media screen and (min-width: 320px) and (max-width: 800px){
-
-  .Heropage {
-    height: 100vh; 
-     height: calc(var(--vh, 1vh) * 100);
-  }
-
-  nav {
-    display: none;            /* simplest: hide on mobile */
-  }
-
-  nav.sticky{
-    display: none;
-  }
-
-  
-/* The Invisible Base Bar */
-  .hamburger-btn {
-      display: block;
-      width: 100%;
-      top: 0;
-      right: 0;
-      margin: 0;
-      /* Adds 15px standard padding + whatever size the phone's notch is */
-      padding: calc(15px + env(safe-area-inset-top)) 25px 15px 25px; 
-      text-align: right;
-      background-color: transparent; 
-      transition: background-color 0.3s ease; 
-  }
-
-  .hamburger-btn.sticky {
-      display: block;
-      width: 100%;
-      margin: 0;
-      padding: 15px 25px; /* Gives nice top/bottom height and side padding */
-      border-radius: 0;
-      background-color: rgba(0, 0, 0, 0.85); /* Slightly darker for better contrast */
-      backdrop-filter: blur(10px);
-      top: 0;
-      right: 0;
-      text-align: right; /* Pushes the hamburger icon to the right */
-      transition: background-color 0.3s ease; /* Smooth fade in */
-  }
-
-
- h1 {
-    font-size: 21vw;         /* scale with viewport width */
-    position: fixed;
-    top: 7%;                /* adjust vertical position */
-    white-space: normal;     /* allow wrapping */
-    max-width: 96dvw;
-    z-index: 1;
-  }
-
-.punk {
-    position: relative;
-    width: 140vw;
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100); /* Stops the ape from stretching! */
-    top: 10%;  
-    overflow: hidden;
-  }
-
-.herotext{
-  position: absolute;
-  top: 70%;
-  margin-left: 4vw;
-  font-weight: 400;
-  font-family: 'Wix Madefor Display', sans-serif;                                                                                                                                                                                                      
-  font-style: normal;
-  font-size: 5.1vw;
-  line-height: 1.35;
-  letter-spacing: -0.02em;
-}
-
-.buy{
-  text-align: center;
-  top: 89%;
-  margin-left: 4vw;
-  width: 48%;
-  height: 8vh;
-  font-size: 1rem;
-  white-space: nowrap;
-}
-}
-
-
-/* About section */
-
-.About{
+/* --- ABOUT SECTION --- */
+.About {
   position: relative;
   width: 100%;
   height: 115vh;
-  /* section height determined by content */
   padding: 2em 2em 0;
   background-color: black;
   color: white;
   z-index: 1;
 }
 
-/* horizontal group for buy button + clipboard */
 .btn-group {
   display: flex;
   align-items: center;
   gap: 10rem;
-  margin-top: 2rem; /* give some spacing from the paragraph */
+  margin-top: 2rem; 
 }
 
-
-.gradient{
-width: 100%;
-height: 200vw;
-height: calc(var(--vh, 1vh) * 200);
-position: relative;
-background: linear-gradient(
-  180deg,
-  rgba(0, 0, 0, 0) 0%,
-  rgba(0, 0, 0, 1) 100%
-);
-z-index: 0;
-pointer-events: none;
+.gradient {
+  width: 100%;
+  height: 200vw;
+  height: calc(var(--vh, 1vh) * 200);
+  position: relative;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+  z-index: 0;
+  pointer-events: none;
 }
 
-h2{
-   display: flex;
-justify-content: center;
-align-items: center;
- font-family: 'Druk Wide Bold', sans-serif;                                                                                          
+h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Druk Wide Bold', sans-serif;                                                                                                               
   font-weight: 700;
   font-style: normal;
   font-size: 5rem;
   padding-bottom: 2%;
 }
 
-.aboutpunk{
+.aboutpunk {
   font-size: 1.5rem;
   line-height: 1.6;
   max-width: 100vw;
@@ -608,7 +438,7 @@ align-items: center;
   overflow: hidden;
 }
 
-.afro{
+.afro {
   width: 40vw;
   height: 85vh;
   float: left;
@@ -617,36 +447,34 @@ align-items: center;
 }
 
 .buy2 {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    height: 48px; /* Perfectly matches your clipboard input height */
-    padding: 0 40px;
-    background-color: rgb(100, 1, 1);
-    color: white;
-    font-family: 'Druk Wide Bold', sans-serif; 
-    font-weight: 800;
-    font-size: clamp(0.8rem, 1.5vw, 1rem); /* Fluid font size */
-    border-radius: 5px;
-    border: none;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.719);
-    animation: glow 1s infinite;
-    text-decoration: none;
-    white-space: nowrap; /* Prevents text from breaking into two lines */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  height: 48px; 
+  padding: 0 40px;
+  background-color: rgb(100, 1, 1);
+  color: white;
+  font-family: 'Druk Wide Bold', sans-serif; 
+  font-weight: 800;
+  font-size: clamp(0.8rem, 1.5vw, 1rem); 
+  border-radius: 5px;
+  border: none;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.719);
+  animation: glow 1s infinite;
+  text-decoration: none;
+  white-space: nowrap; 
 }
 
-.clipboard{
-  /* remove positioning and transform so it flows in layout */
+.clipboard {
   display: flex;
   align-items: center;
   gap: 10px;
-  height: 48px; /* match buy2 outer height */
+  height: 48px; 
   padding: 0 15px;
   background-color: rgba(255, 255, 255, 0.95);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  /* font-family: 'Sanfford', sans-serif; */
 }
 
 .clipboard .contract {
@@ -672,11 +500,11 @@ align-items: center;
   transition: transform 0.2s ease;
 }
 
-.clipbutton:active{
+.clipbutton:active {
   background-color: rgb(126, 124, 124);
 }
 
-.clipboard .clipbutton::before{
+.clipboard .clipbutton::before {
   content: "Copied";
   position: absolute;
   top: 50%;
@@ -688,7 +516,7 @@ align-items: center;
   font-size: 0.7rem;
 }
 
-.clipboard .clipbutton::after{
+.clipboard .clipbutton::after {
   content: "";
   position: absolute;
   top: -50%;
@@ -700,8 +528,8 @@ align-items: center;
   display: none;
 }
 
-.clipboard .clipbutton::before
-.clipboard .clipbutton::after{
+.clipboard .clipbutton::before,
+.clipboard .clipbutton::after {
   display: block;
 }
 
@@ -711,120 +539,25 @@ align-items: center;
   right: 4%;
   width: 100%;
   height: 100vh;
-  pointer-events: none; /* <-- This makes the SVG "click-through-able" */
+  pointer-events: none; 
 }
 
-/* .clipbutton:hover {
-  transform: scale(1.2);
-}
-
-.clipbutton:active {
-  transform: scale(0.95);
-} */
-
-
-@media screen and (max-width: 800px) {
-
-  /* ---------- ABOUT SECTION ---------- */
-  .About {
-    height: auto;            /* let content determine height */
-    padding: 2em 0.5em;
-  }
-
-  h2 {
-    text-align: center;
-    font-size: 17vw;         /* scale heading with viewport */
-    padding-bottom: 1rem;
-  }
-
-  .afro {
-    float: none;             /* remove float */
-    width: 100%;             /* full width */
-    height: auto;            /* maintain aspect ratio */
-    margin: 0 0 0 0;      /* reset negative margins */
-  }
-
-  .aboutpunk {
-    font-size: 5.7vw;
-    margin-top: 1rem;
-    height: auto; 
-   min-height: 15em;
-    margin-bottom: 2rem; 
-    line-height: 1.5;
-    text-align: center;
-    max-width: 100%;
-    clear: both;
-  }
-
-  .btn-group {
-    flex-direction: column;  /* stack buttons vertically */
-    gap: 1rem;
-    align-items: center;
-  }
-
-  .buy2 {
-    width: 90%; 
-    height: 8vh;
-    max-width: 90%;
-    font-size: 1rem;
-    padding: 0; /* Let the 90% width handle the sizing */
-  }
-
-  .clipboard {
-    width: 90%;
-    max-width: 90%;
-    padding: 8%;
-    margin-top: 5%;
-  }
-
- .clipboard .contract {
-    min-width: auto;         /* let it shrink */
-    font-size: 0.8rem;
-  }
-
-  .torn{
-  display: none;
-}
-
-.gradient{
-width: 100vw;
-height: 260vh;
-position: relative;
-background: linear-gradient(
-  180deg,
-  rgba(0, 0, 0, 0) 0%,
-  rgba(0, 0, 0, 1) 100%
-);
-z-index: 0;
-pointer-events: none;
-}
-
-
-  /* Optional: adjust navigation – hide or convert to hamburger */
-  nav {
-    display: none;            /* simplest: hide on mobile */
-  }
-}
-
-
-/* TOKENOMICS SECTION */
-
-.tokenomics{
+/* --- TOKENOMICS SECTION --- */
+.tokenomics {
   position: relative;
-   display: flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-   width: 100%;
+  align-items: flex-start;
+  width: 100%;
   min-height: 100vh;
-  padding: 1em 8em 8em;/* remove top padding to sit flush with previous section */
+  padding: 1em 8em 8em;
   background-color: black;
-  align-items: flex-start; /* align boxes to top of section */
   gap: 2em;
   z-index: 1;
 }
 
-.token{
+.token {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -836,47 +569,47 @@ pointer-events: none;
   padding-bottom: 1%;
 }
 
-.box{
-    display: flex;
-    flex-direction: column; /* stack paragraphs on top of each other */
-    justify-content: flex-start; /* push content to TOP */
-    align-items: flex-start; /* align to left */
-    gap: 0.5rem; /* space between paragraphs */
-    flex: 0 1 45%; /* allow two boxes per row */
-    max-width: 35%;
-    height: 30vh;
-    background-color: rgba(220, 220, 220, 0.13);
-    color: white;
-     font-family: 'Druk Wide Bold', sans-serif;
-    padding: 10px;
-    border-radius: 5px;
- box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.514);
+.box {
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-start; 
+  align-items: flex-start; 
+  gap: 0.5rem; 
+  flex: 0 1 45%; 
+  max-width: 35%;
+  height: 30vh;
+  background-color: rgba(220, 220, 220, 0.13);
+  color: white;
+  font-family: 'Druk Wide Bold', sans-serif;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.514);
 }
 
-.boxes{
-    display: flex;
-    flex-direction: column; /* stack paragraphs on top of each other */
-    justify-content: flex-end; /* push content to BOTTOM */
-    align-items: flex-start; /* align to left */
-    gap: 0.5rem; /* space between paragraphs */
-    flex: 0 1 45%; /* allow two boxes per row */
-    max-width: 35%;
-    height: 30vh;
-    background-color: rgba(220, 220, 220, 0.13);
-    color: white;
-     font-family: 'Druk Wide Bold', sans-serif;
-    padding: 10px;
-    border-radius: 5px;
- box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.514);
+.boxes {
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-end; 
+  align-items: flex-start; 
+  gap: 0.5rem; 
+  flex: 0 1 45%; 
+  max-width: 35%;
+  height: 30vh;
+  background-color: rgba(220, 220, 220, 0.13);
+  color: white;
+  font-family: 'Druk Wide Bold', sans-serif;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.514);
 }
 
 .box p,
 .boxes p {
-  margin: 0; /* remove default paragraph margins */
-text-align: left;
+  margin: 0; 
+  text-align: left;
 }
 
-.boxy{
+.boxy {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -884,7 +617,7 @@ text-align: left;
   position: absolute;
   top: 55%;
   left: 50%;
-  transform: translate(-50%, -50%); /* center both horizontally and vertically */
+  transform: translate(-50%, -50%); 
   gap: 0.5rem;
   width: 28%;
   height: 30vh;
@@ -894,7 +627,7 @@ text-align: left;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.514);
-  z-index: 3; /* ensure it sits above other boxes */
+  z-index: 3; 
 }
 
 .boxy p {
@@ -902,78 +635,33 @@ text-align: left;
   text-align: center;
 }
 
-.edges{
+.edges {
   position: absolute;
   top: 70%;
   right: 24%;
   width: 80vw;
   height: 100vh;
   max-width: 100vw;
- /* overflow: hidden; */
 }
 
-@media screen and (max-width: 800px) {
-/* ---------- TOKENOMICS SECTION ---------- */
- 
-  .tokenomics {
-    flex-direction: column;  
-    padding: 10% 0 0rem 0; /* 10% top, 0 on the sides, 2rem bottom */
-  }
-
-  .token{
-    font-size: 9vw;
-    padding-top: 2%;
-  }
-
- /* The new 100% Math: 96% width + 2% left margin + 2% right margin */
-  .box, .boxes {
-    align-items: center;
-    width: 96%;           /* <-- Shrunk to 96% */
-    max-width: 96%;
-    margin: 0.5rem 2%;    /* <-- Your new 2% side margin! */
-    padding: 10% 5%;
-    font-size: 4vw;
-    gap: 0.9rem;        
-    line-height: 1.5;   
-    white-space: nowrap; 
-  }
-
-  /* Apply the exact same math to the center boxy */
-  .boxy {
-    position: static;        
-    transform: none;
-    width: 96%;           /* <-- Shrunk to 96% */
-    max-width: 96%;
-    height: auto;
-    margin: 1rem 2%;      /* <-- Your new 2% side margin! */
-    padding: 20px;
-    background-color: rgb(220, 220, 220); 
-  }
-
-  .edges{
- display: none;
-}
-}
-
-/* ROADMAP SECTION */
-
+/* --- ROADMAP SECTION --- */
 .roadmap {
-    width: 100%;
-    min-height: 100vh;
-    background-color: black;
-    display: flex;
-    flex-direction: column;
-    gap: 1.4rem;
-    padding-bottom: 6%;
-    position: relative; 
-    z-index: 1;       
+  width: 100%;
+  min-height: 100vh;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  padding-bottom: 6%;
+  position: relative; 
+  z-index: 1;       
 }
 
-.road{
-display: flex;
-justify-content: center;
-align-items: center;
-font-family: 'Druk Wide Bold', sans-serif;                                                                                          
+.road {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Druk Wide Bold', sans-serif;                                                                                                               
   font-weight: 700;
   font-style: normal;
   font-size: 5rem;
@@ -981,33 +669,33 @@ font-family: 'Druk Wide Bold', sans-serif;
   z-index: 2;
 }
 
-.rmap{
+.rmap {
   position: relative;
-   max-width: 20%;
-    height: 25vh;
-    flex-shrink: 0;
-    background-color: rgb(220, 220, 220);
-    color: rgb(12, 12, 12);
-    padding: 25px 10px 0 35px;
-    border-radius: 5px;
- box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.514);
- z-index: 2;
+  max-width: 20%;
+  height: 25vh;
+  flex-shrink: 0;
+  background-color: rgb(220, 220, 220);
+  color: rgb(12, 12, 12);
+  padding: 25px 10px 0 35px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.514);
+  z-index: 2;
 }
 
-.phase{
- font-family: 'Druk Wide Bold', sans-serif;
- padding-bottom: 6px;
+.phase {
+  font-family: 'Druk Wide Bold', sans-serif;
+  padding-bottom: 6px;
 }
 
-.list{
-font-family: 'Wix Madefor Display', sans-serif; 
-font-size: 1.3rem;
-font-weight: 600;
-line-height: 1.5;
-letter-spacing: -0.02em;
+.list {
+  font-family: 'Wix Madefor Display', sans-serif; 
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
 }
 
-.map{
+.map {
   position: absolute;
   top: 62%;
   left: 50%;
@@ -1015,79 +703,13 @@ letter-spacing: -0.02em;
   z-index: 1;
 }
 
-.rmap:nth-child(2){
-  margin-top: 2%;
-  margin-left: 72%;
-}
+.rmap:nth-child(2) { margin-top: 2%; margin-left: 72%; }
+.rmap:nth-child(3) { margin-top: -5%; margin-left: 20%; }
+.rmap:nth-child(4) { margin-top: 4%; margin-left: 63%; }
+.rmap:nth-child(5) { margin-top: -10%; margin-left: 9%; }
 
-.rmap:nth-child(3){
-  margin-top: -5%;
-  margin-left: 20%;
-}
-
-.rmap:nth-child(4){
-  margin-top: 4%;
-  margin-left: 63%;
-}
-
-.rmap:nth-child(5){
-  margin-top: -10%;
-  margin-left: 9%;
-}
-
-@media screen and (max-width: 800px) {
- /* ---------- ROADMAP SECTION ---------- */
-  .roadmap {
-    height: auto;            /* expand with content */
-    /* padding: 1rem; */
-    padding-top: 10%; /* add spacing from previous section */
-  }
-
-  .road {
-    font-size: 12vw;
-    padding-top: 2rem;
-  }
-
-  /* Reset all roadmap cards to normal block flow */
-  .rmap {
-    position: static !important;
-    padding-bottom: 6%;
-    max-width: 96%;
-    width: 96%;
-    height: auto;
-    margin: 1rem auto !important;   /* remove all custom margins */
-   
-  }
-
-  .rmap .phase {
-  padding-left: 25%;
-  min-height: 1.5em; /* ADD — reserves space for the phase title */
-}
-
-.rmap .list {
-  font-size: 5.2vw;
-  line-height: 1.6;
-  padding-left: 8%;
-  min-height: 1.5em; /* ADD — reserves space for each list item */
-}
-
-  .phase{
-     padding-left: 25%;
-  }
-
-.list{
-  font-size: 6vw;
-   padding-left: 8%;
-}
-
-  .map {
-    display: none; /* hide background map on mobile for simplicity */
-  }
-}
-
-/* MARQUEE SECTION */
-
-.marquee{
+/* --- MARQUEE SECTION --- */
+.marquee {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1099,80 +721,39 @@ letter-spacing: -0.02em;
   overflow: hidden;
 }
 
-.ticker{
+.ticker {
   padding: 1vw;
   white-space: nowrap;
 }
 
-.ticker:first-child{
+.ticker:first-child {
   background-color: rgb(14, 13, 13);
   transform: rotateZ(2deg) scale(1.1);
 }
 
-.ticker:last-child{
+.ticker:last-child {
   background-color: red;
   transform: rotateZ(-2deg) scale(1.1);
 }
 
-.ticker-wrap{
+.ticker-wrap {
   display: flex;
   gap: 20px;
 }
 
-.ticker-text{
+.ticker-text {
   font-family: Druk Wide Bold, sans-serif;
-   font-size: clamp(0.57rem, 4.7vw, 1.7rem);
+  font-size: clamp(0.57rem, 4.7vw, 1.7rem);
   font-weight: 1000;
   letter-spacing: 0.03em;
 }
 
-.ticker:last-child .ticker-text{
- color: black;
-}
+.ticker:last-child .ticker-text { color: black; }
+.accent { color: red; }
+.ticker:last-child .accent { color: white; }
 
-.accent{
-  color: red;
-}
-
-.ticker:last-child .accent{
-  color: white;
-}
-@media screen and (max-width: 800px) {
-  .marquee {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 35px;
-    height: 20vh;           /* Let the container grow naturally */
-    min-height: 20vh;       /* Give it a bit more minimum breathing room */
-    padding: 15vh 0vh;         
-    background-color: black;
-    cursor: pointer;
-    overflow: hidden;       /* This stays to hide the horizontal overflow */
-  }
-
-.ticker{
-  padding: 5vw;
-  white-space: nowrap;
-}
-
-.ticker-text{
-   font-size: clamp(0.4rem, 5vw, 2rem);
-  font-weight: 1000;
-  letter-spacing: 0.03em;
-}
-
-.ticker:last-child .ticker-text{
- color: black;
- font-size: clamp(0.4rem, 5vw, 2rem);
- font-weight: 700;
-}
-}
-
-
- /* FAQ SECTION */
-
-.faq{
+/* --- FAQ SECTION --- */
+.faq {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1181,127 +762,81 @@ letter-spacing: -0.02em;
   background-color: black;
   position: relative;
   z-index: 6;
-  overflow: hidden; /* keep the after pseudo-element from spilling out */
-  /* opacity: 0; */
+  overflow: hidden; 
 }
 
-
-
-h5{
+h5 {
   font-family: 'Druk Wide Bold', sans-serif;
   font-size: 4rem;
   padding-top: 10vh;
   padding-bottom: 3vh;
 }
 
-.faqcon{
+.faqcon {
   width: 100%;
   max-width: 68%;
   padding: 10px;
   margin: 10px;
 }
 
-.faqbox{
+.faqbox {
   width: 100%;
-background-color: white;
-padding: 20px;
-border-radius: 5px;
-margin-bottom: 5%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 5%;
 }
 
 .faqheading {
-  display: flex;               /* enable flexbox */
-  justify-content: space-between; /* push children apart */
-  align-items: center;         /* vertically center */
+  display: flex;               
+  justify-content: space-between; 
+  align-items: center;        
   color: black;
   font-family: 'Druk Wide Bold', sans-serif;
   font-size: 1.5rem;
   cursor: pointer;
-  /* remove any leftover float/padding that might interfere */
 }
 
 .question {
   font-family: 'Druk Wide Bold', sans-serif;
-  /* float: left;  <-- remove this */
-  padding-left: 0;             /* adjust if you want some left spacing */
-  margin: 0;                   /* reset margin if needed */
-  flex: 19;                     /* optional: allows text to wrap and take available space */
+  padding-left: 0;             
+  margin: 0;                   
+  flex: 19;                     
 }
 
 .symbol {
   font-size: 1.5rem;
-  /* justify-self: end;  <-- not needed with flexbox */
-  padding-left: 0;             /* remove the large padding */
-  margin-left: 1rem;           /* optional: add a small gap between text and symbol */
-  white-space: nowrap;         /* prevent the plus from wrapping */
+  padding-left: 0;             
+  margin-left: 1rem;           
+  white-space: nowrap;         
 }
 
-.faqtext{
+.faqtext {
   max-height: 0;
   overflow: hidden;
   transition: all .4s ease-in-out;
 }
 
-.faqtext p{
-font-family: 'Wix Madefor Display', sans-serif;
-font-size: 1.5vw;
-font-weight: 700;
-line-height: 1.3;
-letter-spacing: 0.02em;
-padding-top: 10px;
+.faqtext p {
+  font-family: 'Wix Madefor Display', sans-serif;
+  font-size: 1.5vw;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  padding-top: 10px;
 }
 
-.faqbox.active{
+.faqbox.active {
   background-color: white;
   color: black;
 }
 
-.faqbox.active .faqtext{
+.faqbox.active .faqtext {
   max-height: 100vh;
   transition: all .4s ease-in-out;
 }
 
-@media screen and (max-width: 800px) {
- /* ---------- FAQ SECTION ---------- */
-  .faq {
-    height: auto;
-    min-height: 85vh;
-    padding: 0rem 1rem;
-  }
-
-  h5 {
-    font-size: 18vw;
-    padding: 5vh 0;
-  }
-
-  .faqcon {
-    max-width: 99%;      
-    padding: 0;
-  }
-
-  .faqbox {
-    margin-bottom: 5%;
-  }
-
-  .faqheading {
-    font-size: 1.1rem;
-  }
-
-  .question {
-    padding-left: 1%;
-  }
-
-  .symbol {
-    padding-left: 10%;
-  }
-
-  .faqtext p{
-font-size: 4.5vw;
-}
-
-}
-
-/* FOOTER SECTION */
+/* --- FOOTER SECTION --- */
 .footer {
   width: 100%;
   background: black;
@@ -1320,21 +855,21 @@ font-size: 4.5vw;
 
 .footer-content {
   display: flex;
-  justify-content: space-between; /* Pushes text left and icons right */
-  align-items: center; /* Vertically centers them perfectly */
+  justify-content: space-between; 
+  align-items: center; 
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
 .footer-content p {
-  margin: 0; /* Removed bottom margin so it aligns nicely with icons */
+  margin: 0; 
   font-family: 'Druk Wide Bold', sans-serif;
   font-size: 1rem;
 }
 
 .social-links {
-  display: flex; /* Changed from grid to flex for a tight row */
+  display: flex; 
   gap: 1.5rem;
   align-items: center;
   margin: 0;
@@ -1347,7 +882,7 @@ font-size: 4.5vw;
   color: white;
   text-decoration: none;
   font-family: 'Druk Wide Bold', sans-serif;
-  font-size: 1.5rem; /* Slightly reduced so they don't overpower the text */
+  font-size: 1.5rem; 
   transition: color 0.3s ease-in-out;
 }
 
@@ -1355,33 +890,336 @@ font-size: 4.5vw;
   color: red;
 }
 
-/* --- Mobile Responsiveness for Footer --- */
+/* ==========================================
+   1. MOBILE RESPONSIVENESS (up to 800px)
+   ========================================== */
 @media screen and (max-width: 800px) {
-  .footer {
-    padding: 1rem 0 2rem 0;
+
+  /* --- Hero & Nav --- */
+  .Heropage { 
+    height: 100vh; 
+    height: calc(var(--vh, 1vh) * 100); 
+  }
+  
+  nav, nav.sticky { 
+    display: none; 
+  }
+  
+  .hamburger-btn { 
+    display: block; 
+    width: 100%; 
+    top: 0; 
+    right: 0; 
+    margin: 0; 
+    padding: calc(15px + env(safe-area-inset-top)) 25px 15px 25px; 
+    text-align: right; 
+    background-color: transparent; 
+    transition: background-color 0.3s ease; 
+  }
+  
+  .hamburger-btn.sticky { 
+    display: block; 
+    width: 100%; 
+    margin: 0; 
+    padding: 15px 25px; 
+    border-radius: 0; 
+    background-color: rgba(0, 0, 0, 0.85); 
+    backdrop-filter: blur(10px); 
+    top: 0; 
+    right: 0; 
+    text-align: right; 
+    transition: background-color 0.3s ease; 
+  }
+  
+  h1 { 
+    font-size: 21vw; 
+    position: fixed; 
+    top: 7%; 
+    white-space: normal; 
+    max-width: 96dvw; 
+    z-index: 1; 
+  }
+  
+  .punk { 
+    position: relative; 
+    width: 140vw; 
+    height: 100vh; 
+    height: calc(var(--vh, 1vh) * 100); 
+    top: 10%; 
+    overflow: hidden; 
+  }
+  
+  .herotext { 
+    position: absolute; 
+    top: 70%; 
+    margin-left: 4vw; 
+    font-weight: 400; 
+    font-family: 'Wix Madefor Display', sans-serif; 
+    font-style: normal; 
+    font-size: 5.1vw; 
+    line-height: 1.35; 
+    letter-spacing: -0.02em; 
+  }
+  
+  .buy { 
+    text-align: center; 
+    top: 89%; 
+    margin-left: 4vw; 
+    width: 48%; 
+    height: 8vh; 
+    font-size: 1rem; 
+    white-space: nowrap; 
   }
 
-  .footer-content {
-    flex-direction: column; /* Stacks them vertically on small screens */
-    text-align: center;
-    gap: 1.5rem;
-    padding: 0 1rem;
+  /* --- About Section --- */
+  .About { 
+    height: auto; 
+    padding: 2em 0.5em; 
+  }
+  
+  h2 { 
+    text-align: center; 
+    font-size: 17vw; 
+    padding-bottom: 1rem; 
+  }
+  
+  .afro { 
+    float: none; 
+    width: 100%; 
+    height: auto; 
+    margin: 0 0 0 0; 
+  }
+  
+  .aboutpunk { 
+    font-size: 5.7vw; 
+    margin-top: 1rem; 
+    height: auto; 
+    min-height: 15em; 
+    margin-bottom: 2rem; 
+    line-height: 1.5; 
+    text-align: center; 
+    max-width: 100%; 
+    clear: both; 
+  }
+  
+  .btn-group { 
+    flex-direction: column; 
+    gap: 1rem; 
+    align-items: center; 
+  }
+  
+  .buy2 { 
+    width: 90%; 
+    height: 8vh; 
+    max-width: 90%; 
+    font-size: 1rem; 
+    padding: 0; 
+  }
+  
+  .clipboard { 
+    width: 90%; 
+    max-width: 90%; 
+    padding: 8%; 
+    margin-top: 5%; 
+  }
+  
+  .clipboard .contract { 
+    min-width: auto; 
+    font-size: 0.8rem; 
+  }
+  
+  .torn { 
+    display: none; 
+  }
+  
+  .gradient { 
+    width: 100vw; 
+    height: 260vh; 
+    position: relative; 
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%); 
+    z-index: 0; 
+    pointer-events: none; 
   }
 
-  .social-links {
-    justify-content: center;
-    width: 100%;
+  /* --- Tokenomics --- */
+  .tokenomics { 
+    flex-direction: column;  
+    padding: 10% 0 0rem 0; 
+  }
+  
+  .token { 
+    font-size: 9vw; 
+    padding-top: 2%; 
+  }
+  
+  .box, .boxes { 
+    align-items: center; 
+    width: 96%;           
+    max-width: 96%;
+    margin: 0.5rem 2%;    
+    padding: 10% 5%;
+    font-size: 4vw;
+    gap: 0.9rem;        
+    line-height: 1.5;   
+    white-space: nowrap; 
+  }
+  
+  .boxy { 
+    position: static;        
+    transform: none;
+    width: 96%;          
+    max-width: 96%;
+    height: auto;
+    margin: 1rem 2%;      
+    padding: 20px;
+    background-color: rgb(220, 220, 220); 
+  }
+  
+  .edges { 
+    display: none; 
+  }
+
+  /* --- Roadmap --- */
+  .roadmap { 
+    height: auto;            
+    padding-top: 10%; 
+  }
+  
+  .road { 
+    font-size: 12vw; 
+    padding-top: 2rem; 
+  }
+  
+  .rmap { 
+    position: static !important; 
+    padding-bottom: 6%; 
+    max-width: 96%; 
+    width: 96%; 
+    height: auto; 
+    margin: 1rem auto !important;  
+  }
+  
+  .rmap .phase { 
+    padding-left: 25%; 
+    min-height: 1.5em; 
+  }
+  
+  .rmap .list { 
+    font-size: 5.2vw; 
+    line-height: 1.6; 
+    padding-left: 8%; 
+    min-height: 1.5em; 
+  }
+  
+  .phase { 
+    padding-left: 25%; 
+  }
+  
+  .list { 
+    font-size: 6vw;  
+    padding-left: 8%; 
+  }
+  
+  .map { 
+    display: none; 
+  }
+
+  /* --- Marquee --- */
+  .marquee { 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    gap: 35px; 
+    height: 20vh;          
+    min-height: 20vh;       
+    padding: 15vh 0vh;        
+    background-color: black; 
+    cursor: pointer; 
+    overflow: hidden;       
+  }
+  
+  .ticker { 
+    padding: 5vw; 
+    white-space: nowrap; 
+  }
+  
+  .ticker-text {  
+    font-size: clamp(0.4rem, 5vw, 2rem); 
+    font-weight: 1000; 
+    letter-spacing: 0.03em; 
+  }
+  
+  .ticker:last-child .ticker-text { 
+    color: black; 
+    font-size: clamp(0.4rem, 5vw, 2rem); 
+    font-weight: 700; 
+  }
+
+  /* --- FAQ Section --- */
+  .faq { 
+    height: auto; 
+    min-height: 85vh; 
+    padding: 0rem 1rem; 
+  }
+  
+  h5 { 
+    font-size: 18vw; 
+    padding: 5vh 0; 
+  }
+  
+  .faqcon { 
+    max-width: 99%;      
+    padding: 0; 
+  }
+  
+  .faqbox { 
+    margin-bottom: 5%; 
+  }
+  
+  .faqheading { 
+    font-size: 1.1rem; 
+  }
+  
+  .question { 
+    padding-left: 1%; 
+  }
+  
+  .symbol { 
+    padding-left: 10%; 
+  }
+  
+  .faqtext p { 
+    font-size: 4.5vw; 
+  }
+
+  /* --- Footer --- */
+  .footer { 
+    padding: 1rem 0 2rem 0; 
+  }
+  
+  .footer-content { 
+    flex-direction: column; 
+    text-align: center; 
+    gap: 1.5rem; 
+    padding: 0 1rem; 
+  }
+  
+  .social-links { 
+    justify-content: center; 
+    width: 100%; 
   }
 }
 
+
 /* ==========================================
-   1. TABLETS & IPADS (801px to 1024px)
+   2. TABLETS & IPADS (801px to 1024px)
    ========================================== */
 @media screen and (min-width: 801px) and (max-width: 1024px) {
 
+
   /* Navigation */
-  nav { 
-       font-size: 1.22rem;
+  nav{ 
+        font-size: 1.22rem;
         width: 53vw;
         margin: 2% 0 0 47%;
         padding: 11px; 
@@ -1396,7 +1234,7 @@ font-size: 4.5vw;
     position: relative;
     width: 140vw;
     height: 100vh;
-    height: calc(var(--vh, 1vh) * 100); /* Stops the ape from stretching! */
+    height: calc(var(--vh, 1vh) * 100); 
     top: 8%;  
     overflow: hidden;
   }
@@ -1409,7 +1247,7 @@ font-size: 4.5vw;
      }
 
   .herotext {
-     font-size: 2.2rem; 
+     font-size: 2rem; 
      font-weight: 500;
      top: 70%;
      }
@@ -1425,101 +1263,155 @@ font-size: 4.5vw;
 } 
   
   /* About */
-   /* ---------- ABOUT SECTION ---------- */
   .About {
-    height: auto;            /* let content determine height */
+    height: auto;            
     padding: 2em 0em;
   }
 
   h2 {
-    font-size: 8.5vw;         /* scale heading with viewport */
+    font-size: 8.5vw;         
     padding-bottom: 1.4rem;
   }
 
   .afro {
-    float: none;             /* remove float */
-    width: 90%;             /* full width */
-    height: 70vh;            /* maintain aspect ratio */
-    margin: 0 0 0 0;      /* reset negative margins */
+    float: none;             
+    width: 90%;             
+    height: 70vh;            
+    margin: 0 0 0 0;      
   }
 
  .aboutpunk {
-    font-size: 4.3vw;
-    margin-top: 2rem;
+    font-size: 4vw;
+    margin: 2.3em auto 2em auto;
     height: auto; 
-   min-height: 10em;
-    margin-bottom: 2rem; 
+    min-height: 11em;
     line-height: 1.5;
     text-align: center;
-    max-width: 100%;
+    max-width: 98%;
     clear: both;
   }
 
-
   .btn-group { 
       display: flex;
-      flex-direction: row;       /* Forces them side-by-side */
-      justify-content: center;   /* Centers the group */
-      align-items: stretch;      /* Forces both items to match heights exactly! */
-      gap: 4%;                   /* Handles the spacing cleanly */
+      flex-direction: row;       
+      justify-content: center;   
+      align-items: stretch;      
+      gap: 4%;                   
       margin-top: 2rem;
   }
-
   
   .buy2 {
       width: 45%; 
       max-width: 45%;
-      height: 7vh;               /* The Master Height */
-      font-size: 1rem;
-      margin: 0;                 /* Removed the rogue margin */
+      height: 7vh;               
+      font-size: 1.1rem;
+      margin: 0;                 
       padding: 0; 
   }
-
   
   .clipboard {
       width: 45%;
       max-width: 45%;
-      height: 7vh;               /* Matches the Buy button perfectly */
-      margin: 0;                 /* Removed the rogue margin-top! */
-      padding: 0 15px;           /* Side padding only, no vertical padding */
+      height: 7vh;               
+      margin: 0;                 
+      padding: 0 15px;           
   }
-
 
   .clipboard .contract {
       min-width: auto;         
-      font-size: 1rem;         /* Adjust this! (Warning: 8rem will explode your layout!) */
+      font-size: 1rem;         
       width: 100%;
   }
 
  .torn {
   position: absolute;
-  top: 48%;
-  right: 4%;
+  top: 45%;
+  right: 0;
   width: 100%;
   height: 100vh;
-  pointer-events: none; /* <-- This makes the SVG "click-through-able" */
+  overflow: hidden;
+  pointer-events: none; 
 }
 
-
-  /* Tokenomics - Switches to a 2-column grid */
-  .token { font-size: 4rem; }
-  .box, .boxes { max-width: 45%; flex: 1 1 45%; font-size: 0.9rem; }
-  .boxy { width: 45%; font-size: 0.9rem; }
-  .edges { display: none; }
   
-  /* Roadmap - Adjusts the zig-zag to fit the narrower screen */
-  .road { font-size: 4rem; }
-  .rmap { max-width: 40%; }
-  .rmap:nth-child(2) { margin-left: 55%; }
-  .rmap:nth-child(3) { margin-left: 5%; }
-  .rmap:nth-child(4) { margin-left: 55%; }
-  .rmap:nth-child(5) { margin-left: 5%; }
-  .map { transform: translate(-50%, -50%) scale(0.7); }
+ /* --- Tokenomics --- */
+  .tokenomics {
+    padding: 14% 4%; /* Overrides the massive 8em desktop padding */
+    justify-content: space-between; /* Forces the boxes to snap to the left and right edges */
+    gap: 2rem 0; /* 2rem vertical gap between rows, 0 horizontal gap (handled by space-between) */
+  }
+  
+  .token { 
+    font-size: 9.3vw; /* Fluid text sizing so "TOKENOMICS" perfectly spans edge-to-edge */
+    padding-bottom: 1rem;
+  }
+  
+  .box, .boxes { 
+    flex: 0 0 48.5%; /* Each box takes up 48.5% width, leaving a perfect 3% gap in the middle */
+    max-width: 48.5%; 
+    font-size: 2.35vw;
+  }
+  
+  .boxy { 
+    width: 48%; /* Keeps the center box nicely proportioned */
+    font-size: 2.35vw; 
+  }
+  
+  .edges { 
+    display: none; 
+  }
   
 
+/* --- Roadmap --- */
+
+.roadmap{
+  min-height: 90vh;
+  padding-bottom: 0%;
+}
+
+  .road { 
+    font-size: 4rem; 
+  }
+  
+  .rmap { 
+    max-width: 35%; /* Gives the text enough room so it doesn't wrap awkwardly */
+    height: auto; 
+    min-height: 17vh; 
+    padding-bottom: 25px; 
+  }
+  
+  /* Precision alignment to hug the curves of the full-size SVG map */
+  .rmap:nth-child(2) { margin-left: 62%; margin-top: 6%; }
+  .rmap:nth-child(3) { margin-left: 4%; margin-top: -10%; }
+  .rmap:nth-child(4) { margin-left: 62%; margin-top: 2%; }
+  .rmap:nth-child(5) { margin-left: 4%; margin-top: -10%; }
+
+  .list {
+  font-family: 'Wix Madefor Display', sans-serif; 
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  }
+  
+ .map { 
+    max-width: 5vw !important;
+     top: 48vh !important; /* Switched to vh and forced it to the top */
+     left: 1% !important;
+     transform: translate(-50%, -50%) !important; 
+  }
+
+
+  /* --- MARQUEE SECTION --- */
+.marquee {
+  height: 19vh;
+  min-height: 19vh;
+}
+
+  
   /* FAQ */
    .faq {
-    height: auto;
+    height: 70vh;
     min-height: 70vh;
     padding: 0rem 1rem;
   }
@@ -1532,8 +1424,8 @@ font-size: 4.5vw;
      max-width: 85%;
   }
 
-}
+  .faqtext p { 
+    font-size: 2.5vw; 
+  }
 
-  
-  
-
+  }
